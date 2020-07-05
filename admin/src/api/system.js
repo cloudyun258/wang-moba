@@ -54,3 +54,48 @@ export function fetchCateItem (params) {
   })
 }
 
+// ----添加广告位----
+export function saveAds (data) {
+  return request({
+    url: '/ads/add',
+    method: 'post',
+    data
+  })
+}
+
+// 修改广告位
+export function updateAds (data) {
+  return request({
+    url: '/ads/update',
+    method: 'put',
+    data
+  })
+}
+
+// 删除广告位
+export function deleteAds (params) {
+  return request({
+    url: '/ads/delete',
+    method: 'delete',
+    params
+  })
+}
+
+// 获取广告位列表
+export function fetchAds (params) {
+  return request({
+    url: '/ads/list',
+    method: 'get',
+    params
+  })  
+}
+
+// 查询要编辑的广告位信息
+export function fetchAdsItem (params) {
+  return request({
+    url: '/ads/item',
+    method: 'get',
+    params
+  })
+}
+

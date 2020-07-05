@@ -139,6 +139,26 @@ const routes = [
         props: true,
         component: () => import('@/views/system/CateEdit'),
         meta: { title: '编辑分类' }
+      },
+
+      {
+        path: 'adsAdd',
+        name: 'ads-add',
+        component: () => import('@/views/system/AdsEdit'),
+        meta: { title: '新建广告位' }
+      }, 
+      {
+        path: 'adsList',
+        name: 'ads-list',
+        component: () => import('@/views/system/AdsList'),
+        meta: { title: '广告位列表' }
+      },
+      {
+        path: 'adsUpdate/:id',
+        name: 'ads-update',
+        props: true,
+        component: () => import('@/views/system/AdsEdit'),
+        meta: { title: '编辑广告位' }
       }
     ]
   }

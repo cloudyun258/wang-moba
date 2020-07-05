@@ -3,6 +3,7 @@ const CategoryModel = require('../models/category')
 const EquipModel = require('../models/equip')
 const StoreModel = require('../models/store')
 const HeroModel = require('../models/hero')
+const AdModel = require('../models/ad')
 const jwt = require('jsonwebtoken')
 const dayjs = require('dayjs')
 const response = require('../utils/response')
@@ -366,6 +367,52 @@ module.exports = {
       { $limit: pageSize }
     ])
     response(res, 0, '获取英雄数据成功', { heroTotal, heroList })
+  },
+
+  // -----添加或修改广告位-----
+  async adsEditHandle (req, res) {
+    const { id, name, items } = req.body
+    const isHave = await AdModel.findOne({ name })
+    if (isHave && !id) {
+      response(res, 1, '该广告位已存在')
+      return
+    }
+    let item, msg
+    if (id) {
+      // 修改广告位
+      item = await AdModel.findByIdAndUpdate(id, { name, items })
+      msg = '更新广告位成功'
+    } else {
+      // 添加广告位
+      item = await AdModel.create({ name, items })
+      msg = '新建广告位成功'
+    }
+    response(res, 0, msg, item)    
+  },
+
+  // 获取广告位列表
+  async adsListHandle (req, res) {
+    const totalItem = await AdModel.find()
+    response(res, 0, '获取广告位列表成功', totalItem)
+  },
+
+  // 删除广告位
+  async adsDeleteHandle (req, res) {
+    const id = req.query.id
+    const item = await AdModel.findByIdAndDelete(id)
+    response(res, 0, '删除广告位成功', item)        
+  },
+
+  // 获取广告位详情
+  async adsItemHandle (req, res) {
+    const id  = req.query.id
+    const [err, item] = await awaitWrap(AdModel.findById(id))
+    // 查询出错
+    if (err) {
+      response(res, 1, '获取广告位详情失败')
+      return
+    }
+    response(res, 0, '获取广告位详情成功', item)    
   }
 
 }

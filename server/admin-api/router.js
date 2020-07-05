@@ -44,6 +44,12 @@ router.put('/hero/update', handle.auth, handle.heroEditHandle)
 router.get('/hero/list', handle.auth, handle.heroListHandle)
 router.get('/hero/item', handle.auth, handle.heroItemHandle)
 router.get('/hero/cate', handle.auth, handle.heroCateHandle)
+// 广告位
+router.post('/ads/add', handle.auth, handle.adsEditHandle)
+router.delete('/ads/delete', handle.auth, handle.adsDeleteHandle)
+router.put('/ads/update', handle.auth, handle.adsEditHandle)
+router.get('/ads/list', handle.auth, handle.adsListHandle)
+router.get('/ads/item', handle.auth, handle.adsItemHandle)
 
 // 导出路由对象
 module.exports = router

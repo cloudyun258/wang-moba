@@ -42,6 +42,8 @@
         </template>
         <el-menu-item index="/system/cateAdd">新建分类</el-menu-item>
         <el-menu-item index="/system/cateList">分类列表</el-menu-item>
+        <el-menu-item index="/system/adsAdd">新建广告位</el-menu-item>
+        <el-menu-item index="/system/adsList">广告位列表</el-menu-item>
       </el-submenu>
 
        <el-menu-item class="github-link">
