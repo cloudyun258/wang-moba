@@ -7,7 +7,7 @@ wang-moba是使用 Node.js (Express.js) + Vue.js (Element UI) 全栈开发的王
 
 ------
 
-MIT license.
+MIT license
 
 Copyright (c) [2020] [name of copyright yuchuangye]
 
