@@ -1,4 +1,4 @@
-// 路由处理函数
+// 路由处理文件
 const CategoryModel = require('../models/category')
 const EquipModel = require('../models/equip')
 const StoreModel = require('../models/store')
