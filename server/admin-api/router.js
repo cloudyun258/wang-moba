@@ -50,6 +50,12 @@ router.delete('/ads/delete', handle.auth, handle.adsDeleteHandle)
 router.put('/ads/update', handle.auth, handle.adsEditHandle)
 router.get('/ads/list', handle.auth, handle.adsListHandle)
 router.get('/ads/item', handle.auth, handle.adsItemHandle)
+// 管理员
+router.post('/user/add', handle.auth, handle.userEditHandle)
+router.delete('/user/delete', handle.auth, handle.userDeleteHandle)
+router.put('/user/update', handle.auth, handle.userEditHandle)
+router.get('/user/list', handle.auth, handle.userListHandle)
+router.get('/user/item', handle.auth, handle.userItemHandle)
 
 // 导出路由对象
 module.exports = router

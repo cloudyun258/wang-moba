@@ -44,6 +44,8 @@
         <el-menu-item index="/system/cateList">分类列表</el-menu-item>
         <el-menu-item index="/system/adsAdd">新建广告位</el-menu-item>
         <el-menu-item index="/system/adsList">广告位列表</el-menu-item>
+        <el-menu-item index="/system/userAdd">新建管理员</el-menu-item>
+        <el-menu-item index="/system/userList">管理员列表</el-menu-item>
       </el-submenu>
 
        <el-menu-item class="github-link">

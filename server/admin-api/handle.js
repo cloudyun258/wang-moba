@@ -4,6 +4,7 @@ const EquipModel = require('../models/equip')
 const StoreModel = require('../models/store')
 const HeroModel = require('../models/hero')
 const AdModel = require('../models/ad')
+const UserModel = require('../models/user')
 const jwt = require('jsonwebtoken')
 const dayjs = require('dayjs')
 const response = require('../utils/response')
@@ -413,6 +414,54 @@ module.exports = {
       return
     }
     response(res, 0, '获取广告位详情成功', item)    
+  },
+
+  // ----- 添加或修改管理员 -----
+  async userEditHandle (req, res) {
+    // 获取装备信息
+    const  { username, password, id } = req.body
+    const isHave = await UserModel.findOne({ username })
+    // 如果是添加, 有同名的不允许添加
+    if (isHave && !id) {
+      response(res, 1, '该管理员已存在')
+      return
+    }
+    let item, msg
+    if (id) {
+      // 修改装备
+      item = await  UserModel.findByIdAndUpdate(id, { username, password })
+      msg = '更新管理员成功'
+    } else {
+      // 添加装备
+      item = await  UserModel.create({ username, password })
+      msg = '新建管理员成功'
+    }
+    response(res, 0, msg, item)    
+  },
+
+  // 删除管理员
+  async userDeleteHandle (req, res) {
+    const id = req.query.id
+    const item = await UserModel.findByIdAndDelete(id)
+    response(res, 0, '删除管理员成功', item)          
+  },
+  
+  // 获取管理员列表
+  async userListHandle (req, res) {
+    const totalItem = await UserModel.find()
+    response(res, 0, '获取管理员列表成功', totalItem)    
+  },
+
+  // 获取管理员详情
+  async userItemHandle (req, res) {
+    const id  = req.query.id
+    const [err, item] = await awaitWrap(UserModel.findById(id))
+    // 查询出错
+    if (err) {
+      response(res, 1, '获取管理员详情失败')
+      return
+    }
+    response(res, 0, '获取管理员详情成功', item)        
   }
 
 }
