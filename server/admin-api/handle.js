@@ -7,6 +7,7 @@ const AdModel = require('../models/ad')
 const UserModel = require('../models/user')
 const jwt = require('jsonwebtoken')
 const dayjs = require('dayjs')
+const bcrypt = require('bcryptjs')
 const response = require('../utils/response')
 const awaitWrap = require('../utils/error')
 
@@ -418,7 +419,7 @@ module.exports = {
 
   // ----- 添加或修改管理员 -----
   async userEditHandle (req, res) {
-    // 获取装备信息
+    // 获取管理员信息
     const  { username, password, id } = req.body
     const isHave = await UserModel.findOne({ username })
     // 如果是添加, 有同名的不允许添加
@@ -428,11 +429,19 @@ module.exports = {
     }
     let item, msg
     if (id) {
-      // 修改装备
+      // 验证密码
+      const isUser = await UserModel.findById(id).select('+password')
+      const isPassword = bcrypt.compareSync(password, isUser.password)
+      // 密码无效
+      if (!isPassword) {
+        response(res, 1, '密码错误')
+        return
+      }
+      // 密码正确才允许修改管理员
       item = await  UserModel.findByIdAndUpdate(id, { username, password })
       msg = '更新管理员成功'
     } else {
-      // 添加装备
+      // 添加管理员
       item = await  UserModel.create({ username, password })
       msg = '新建管理员成功'
     }

@@ -70,7 +70,7 @@
       async getUserItem () {
         const res = await fetchUserItem({ id: this.id })
         this.model.username = res.data.username
-        this.model.password = res.data.password
+        this.model.password = ''
       }      
     }
   }
