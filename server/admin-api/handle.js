@@ -37,14 +37,25 @@ module.exports = {
 
     let username = req.body.username
     let password = req.body.password
-
-    if (username !== 'admin' || password !== '123456') {
-      response(res, 1, '用户名或密码错误')
+    // 根据用户名查找用户
+    const user = await UserModel.findOne({ username }).select('+password')
+    // 用户不存在
+    if (!user) {
+      response(res, 1, '用户不存在')
       return
     }
+
+    // 用户存在, 验证密码
+    const isPassword = bcrypt.compareSync(password, user.password)
+    // 密码错误
+    if (!isPassword) {
+      response(res, 1, '密码错误')
+      return      
+    }
+    
     // 登陆成功, 生成token
     const token = jwt.sign({ 
-      username: String(username)
+      id: String(user._id)
     }, SECRET)
     // 返回token
     response(res, 0, '登录成功', { username }, token)
@@ -52,7 +63,7 @@ module.exports = {
 
   //登录验证
   async authHandle (req, res) {
-    response(res, 0, '身份验证成功', { username: req.tokenRes.username } )
+    response(res, 0, '身份验证成功')
   },
 
   // 文件上传
@@ -430,19 +441,19 @@ module.exports = {
     let item, msg
     if (id) {
       // 验证密码
-      const isUser = await UserModel.findById(id).select('+password')
-      const isPassword = bcrypt.compareSync(password, isUser.password)
+      const user = await UserModel.findById(id).select('+password')
+      const isPassword = bcrypt.compareSync(password, user.password)
       // 密码无效
       if (!isPassword) {
         response(res, 1, '密码错误')
         return
       }
       // 密码正确才允许修改管理员
-      item = await  UserModel.findByIdAndUpdate(id, { username, password })
+      item = await UserModel.findByIdAndUpdate(id, { username, password })
       msg = '更新管理员成功'
     } else {
       // 添加管理员
-      item = await  UserModel.create({ username, password })
+      item = await UserModel.create({ username, password })
       msg = '新建管理员成功'
     }
     response(res, 0, msg, item)    
