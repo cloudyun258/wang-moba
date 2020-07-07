@@ -75,9 +75,10 @@
           this.$message.error('铭文属性不符合规则 (xxx;xx;xxxx;)')
           return
         }
+        // 将属性字符串分割成字符串数组存储
         attr = attr.split(';')
         attr.pop()
-          //根据id判断是新建还是编辑
+        //根据id判断是新建还是编辑
         let res
         if (id) {   
           res = await updateStore({ id, name, icon, attr, category })
@@ -101,9 +102,7 @@
       async getStoreItem () {
         const res = await fetchStoreItem({ id: this.id })
         let attrStr = ''
-        res.data.attr.forEach(item => {
-          attrStr += item + ';'
-        })
+        res.data.attr.forEach(item => { attrStr += item + ';' })
         this.model.name = res.data.name
         this.model.icon = res.data.icon
         this.model.attr = attrStr
