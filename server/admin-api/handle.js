@@ -5,9 +5,12 @@ const StoreModel = require('../models/store')
 const HeroModel = require('../models/hero')
 const AdModel = require('../models/ad')
 const UserModel = require('../models/user')
+
 const jwt = require('jsonwebtoken')
 const dayjs = require('dayjs')
 const bcrypt = require('bcryptjs')
+const assert = require('http-assert')
+
 const response = require('../utils/response')
 const awaitWrap = require('../utils/error')
 
@@ -265,7 +268,7 @@ module.exports = {
     const [err, item] = await awaitWrap(StoreModel.findById(id))
     // 查询出错
     if (err) {
-      response(res, 1, '获取铭文详情失败')
+      res.status(422).send('服务器查询出错~')
       return
     }
     response(res, 0, '获取铭文详情成功', item)
@@ -422,7 +425,7 @@ module.exports = {
     const [err, item] = await awaitWrap(AdModel.findById(id))
     // 查询出错
     if (err) {
-      response(res, 1, '获取广告位详情失败')
+      res.status(422).send('服务器查询出错~')
       return
     }
     response(res, 0, '获取广告位详情成功', item)    
@@ -478,7 +481,7 @@ module.exports = {
     const [err, item] = await awaitWrap(UserModel.findById(id))
     // 查询出错
     if (err) {
-      response(res, 1, '获取管理员详情失败')
+      res.status(422).send('服务器查询出错~')
       return
     }
     response(res, 0, '获取管理员详情成功', item)        

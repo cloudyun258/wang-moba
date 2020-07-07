@@ -39,6 +39,7 @@ service.interceptors.response.use(
   },
 
   error => {
+    Message.error(error.response.data)
     // 对响应错误做些什么
     return Promise.reject(error)
   }

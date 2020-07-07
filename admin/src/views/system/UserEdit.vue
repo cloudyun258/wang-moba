@@ -68,7 +68,13 @@
       },
       // 获取管理员详情
       async getUserItem () {
-        const res = await fetchUserItem({ id: this.id })
+        let res
+        try {
+          res = await fetchUserItem({ id: this.id })
+        } catch (err) {
+          this.model.username = 'user-find-error'
+          this.model.password = ''
+        }
         this.model.username = res.data.username
         this.model.password = ''
       }      
