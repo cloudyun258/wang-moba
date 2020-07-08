@@ -9,5 +9,5 @@ const AdSchema = mongoose.Schema({
   }]
 })
 
-// 对应集合(表)为 tests
+
 module.exports = mongoose.model('Ad', AdSchema)

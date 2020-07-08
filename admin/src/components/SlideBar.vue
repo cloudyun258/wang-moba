@@ -26,7 +26,18 @@
         <el-menu-item index="/goods/storeList">铭文列表</el-menu-item>
       </el-submenu>
 
-       <el-submenu index="3">
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="el-icon-edit-outline"></i>
+          <span slot="title">资源管理</span>
+        </template>
+        <el-menu-item index="/resource/articleAdd">新建文章</el-menu-item>
+        <el-menu-item index="/resource/articleList">文章列表</el-menu-item>
+        <el-menu-item index="/resource/videoAdd">新建视频</el-menu-item>
+        <el-menu-item index="/resource/videoList">视频列表</el-menu-item>
+      </el-submenu>      
+
+       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-s-custom"></i>
           <span slot="title">英雄管理</span>
@@ -35,7 +46,7 @@
         <el-menu-item index="/hero/heroList">英雄列表</el-menu-item>
       </el-submenu>
 
-      <el-submenu index="4">
+      <el-submenu index="5">
         <template slot="title">
           <i class="el-icon-s-tools"></i>
           <span slot="title">系统设置</span>

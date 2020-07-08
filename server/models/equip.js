@@ -6,5 +6,5 @@ const EquipSchema = mongoose.Schema({
   icon: { type: String }
 })
 
-// 对应集合(表)为 tests
+
 module.exports = mongoose.model('Equip', EquipSchema)

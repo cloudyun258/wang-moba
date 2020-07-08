@@ -5,6 +5,7 @@ const StoreModel = require('../models/store')
 const HeroModel = require('../models/hero')
 const AdModel = require('../models/ad')
 const UserModel = require('../models/user')
+const ArticleModel = require('../models/article')
 
 const jwt = require('jsonwebtoken')
 const dayjs = require('dayjs')
@@ -485,6 +486,84 @@ module.exports = {
       return
     }
     response(res, 0, '获取管理员详情成功', item)        
+  },
+
+  // ----- 添加或修改文章 -----
+  async articleEditHandle (req, res) {
+    const { id, title, body, hot, categories } = req.body
+    const isHave = await ArticleModel.findOne({ title })
+    if (isHave && !id) {
+      response(res, 1, '该文章已存在')
+      return
+    }
+    let item, msg
+    if (id) {
+      // 修改文章
+      item = await ArticleModel.findByIdAndUpdate(id, { title, body, hot, categories })
+      msg = '更新文章成功'
+    } else {
+      // 添加广告位
+      item = await ArticleModel.create({ title, body, hot, categories })
+      msg = '新建文章成功'
+    }
+    response(res, 0, msg, item)        
+  },
+
+  // 删除文章
+  async articleDeleteHandle (req, res) {
+    const id = req.query.id
+    const item = await ArticleModel.findByIdAndDelete(id)
+    response(res, 0, '删除文章成功', item)           
+  },
+
+  // 获取文章二级分类
+  async articleCateHandle (req, res) {
+    const articleCate = await CategoryModel.find({ 
+      parent: { $in: ['5efae758b9cea00ae86dd276', '5f006b45422de13514b1a310'] }
+    })
+    response(res, 0, '获取文章二级分类成功', articleCate)
+  },
+
+  // 获取文章列表
+  async articleListHandle (req, res) {
+    // 获取第几页数据, 不传为第一页
+    let page = Number(req.query.page) ? Number(req.query.page) : 1
+    // 每页多少条数据, 不传获取5条
+    let pageSize = Number(req.query.pageSize) ? Number(req.query.pageSize) : 5
+    // 需要跳过的数据条数
+    let skip = (page - 1) * pageSize
+    // 数据库中装备总数
+    const articleTotal = await ArticleModel.find().countDocuments()
+    const articleList = await ArticleModel.aggregate([
+      {
+        $lookup: {
+          // 关联 categories表, 注意不是模型名category
+          from: 'categories',
+          // 主表关联的字段
+          localField: 'categories',
+          // 被关联表要关联的字段
+          foreignField: '_id',
+          // 关联查询出来的放在 categoryInfo属性中
+          as: 'categoryInfo'
+        }
+      },
+      // 跳过条数
+      { $skip: skip },
+      { $limit: pageSize }
+    ])
+    response(res, 0, '获取文章列表成功',  { articleTotal, articleList })
+  },
+
+  // 获取文章详情
+  async articleItemHandle (req, res) {
+    const id = req.query.id
+    const [err, item] = await awaitWrap(ArticleModel.findById(id))
+    // 查询出错
+    if (err) {
+      res.status(422).send('服务器查询出错~')
+      return
+    }
+    response(res, 0, '获取文章详情成功', item)            
   }
 
 }

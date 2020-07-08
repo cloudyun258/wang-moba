@@ -86,6 +86,55 @@ const routes = [
   },
 
   {
+    path: '/resource',
+    component: () => import('@/views/Layout'),
+    redirect: '/resource/articleAdd',
+    name: 'resource',
+    meta: { title: '资源管理' },
+    children: [
+      {
+        path: 'articleAdd',
+        name: 'article-add',
+        component: () => import('@/views/resources/ArticleEdit'),
+        meta: { title: '新建文章' }
+      }, 
+      {
+        path: 'articleList',
+        name: 'article-list',
+        component: () => import('@/views/resources/ArticleList'),
+        meta: { title: '文章列表' }
+      }, 
+      {
+        path: 'articleUpdate/:id',
+        name: 'article-update',
+        props: true,
+        component: () => import('@/views/resources/ArticleEdit'),
+        meta: { title: '编辑文章' }
+      },
+
+      {
+        path: 'videoAdd',
+        name: 'video-add',
+        component: () => import('@/views/resources/VideoEdit'),
+        meta: { title: '新建视频' }
+      }, 
+      {
+        path: 'videoList',
+        name: 'video-list',
+        component: () => import('@/views/resources/VideoList'),
+        meta: { title: '视频列表' }
+      }, 
+      {
+        path: 'videoUpdate/:id',
+        name: 'video-update',
+        props: true,
+        component: () => import('@/views/resources/VideoEdit'),
+        meta: { title: '编辑视频' }
+      }
+    ]
+  },
+
+  {
     path: '/hero',
     component: () => import('@/views/Layout'),
     redirect: '/hero/heroAdd',

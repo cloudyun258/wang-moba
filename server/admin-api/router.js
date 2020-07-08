@@ -58,6 +58,13 @@ router.delete('/user/delete', handle.auth, handle.userDeleteHandle)
 router.put('/user/update', handle.auth, handle.userEditHandle)
 router.get('/user/list', handle.auth, handle.userListHandle)
 router.get('/user/item', handle.auth, handle.userItemHandle)
+// 文章
+router.post('/article/add', handle.auth, handle.articleEditHandle)
+router.delete('/article/delete', handle.auth, handle.articleDeleteHandle)
+router.put('/article/update', handle.auth, handle.articleEditHandle)
+router.get('/article/cate', handle.auth, handle.articleCateHandle)
+router.get('/article/list', handle.auth, handle.articleListHandle)
+router.get('/article/item', handle.auth, handle.articleItemHandle)
 
 // 导出路由对象
 module.exports = router
