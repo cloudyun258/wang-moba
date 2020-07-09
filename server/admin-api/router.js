@@ -65,6 +65,13 @@ router.put('/article/update', handle.auth, handle.articleEditHandle)
 router.get('/article/cate', handle.auth, handle.articleCateHandle)
 router.get('/article/list', handle.auth, handle.articleListHandle)
 router.get('/article/item', handle.auth, handle.articleItemHandle)
+// 视频
+router.post('/video/add', handle.auth, handle.videoEditHandle)
+router.delete('/video/delete', handle.auth, handle.videoDeleteHandle)
+router.put('/video/update', handle.auth, handle.videoEditHandle)
+router.get('/video/cate', handle.auth, handle.videoCateHandle)
+router.get('/video/list', handle.auth, handle.videoListHandle)
+router.get('/video/item', handle.auth, handle.videoItemHandle)
 
 // 导出路由对象
 module.exports = router

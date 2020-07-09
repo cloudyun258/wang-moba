@@ -63,3 +63,57 @@ export function  uploadEditorFile(data) {
     data
   })
 }
+
+// ----- 新建视频 -----
+export function saveVideo (data) {
+  return request({
+    url: '/video/add',
+    method: 'post',
+    data
+  })
+}
+
+// 删除视频
+export function deleteVideo (params) {
+  return request({
+    url: '/video/delete',
+    method: 'delete',
+    params
+  })
+}
+
+// 修改视频
+export function updateVideo (data) {
+  return request({
+    url: '/video/update',
+    method: 'put',
+    data
+  })
+}
+
+// 获取视频列表
+export function fetchVideo (params) {
+  return request({
+    url: '/video/list',
+    method: 'get',
+    params
+  })
+}
+
+// 获取视频二级分类
+export function fetchVideoTwo (params) {
+  return request({
+    url: '/video/cate',
+    method: 'get',
+    params
+  })
+}
+
+// 获取视频详情
+export function fetchVideoItem (params) {
+  return request({
+    url: '/video/item',
+    method: 'get',
+    params
+  })
+}

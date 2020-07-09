@@ -6,6 +6,7 @@ const HeroModel = require('../models/hero')
 const AdModel = require('../models/ad')
 const UserModel = require('../models/user')
 const ArticleModel = require('../models/article')
+const VideoModel = require('../models/video')
 
 const jwt = require('jsonwebtoken')
 const dayjs = require('dayjs')
@@ -307,7 +308,7 @@ module.exports = {
 
   // -----获取英雄二级分类 ---- 
   async heroCateHandle (req, res) {
-    // 找出铭文下的子分类
+    // 找出英雄下的子分类
     const heroCate = await CategoryModel.find({ parent: "5ef9a67208fb182c3c173e77" })
     response(res, 0, '获取英雄二级分类成功', heroCate)
   },
@@ -564,6 +565,83 @@ module.exports = {
       return
     }
     response(res, 0, '获取文章详情成功', item)            
+  },
+
+  // ----- 添加或更新视频
+  async videoEditHandle (req, res) {
+    const { id, title, cover, video, play, category } = req.body
+    const isHave = await VideoModel.findOne({ title })
+    if (isHave && !id) {
+      response(res, 1, '该视频已存在')
+      return
+    }
+    let item, msg
+    if (id) {
+      // 修改文章
+      item = await VideoModel.findByIdAndUpdate(id, { title, cover, video, play, category })
+      msg = '更新视频成功'
+    } else {
+      // 添加广告位
+      item = await VideoModel.create({ title, cover, video, play, category })
+      msg = '新建视频成功'
+    }
+    response(res, 0, msg, item)    
+  },
+
+  // 删除视频
+  async videoDeleteHandle (req, res) {
+    const id = req.query.id
+    const item = await VideoModel.findByIdAndDelete(id)
+    response(res, 0, '删除视频成功', item)         
+  },
+
+  // 获取视频列表
+  async videoListHandle (req, res) {
+    // 获取第几页数据, 不传为第一页
+    let page = Number(req.query.page) ? Number(req.query.page) : 1
+    // 每页多少条数据, 不传获取5条
+    let pageSize = Number(req.query.pageSize) ? Number(req.query.pageSize) : 5
+    // 需要跳过的数据条数
+    let skip = (page - 1) * pageSize
+    // 数据库中装备总数
+    const videoTotal = await VideoModel.find().countDocuments()
+    const videoList = await VideoModel.aggregate([
+      {
+        $lookup: {
+          // 关联 categories表, 注意不是模型名category
+          from: 'categories',
+          // 主表关联的字段
+          localField: 'category',
+          // 被关联表要关联的字段
+          foreignField: '_id',
+          // 关联查询出来的放在 categoryInfo属性中
+          as: 'categoryInfo'
+        }
+      },
+      // 跳过条数
+      { $skip: skip },
+      { $limit: pageSize }
+    ])
+    response(res, 0, '获取文章列表成功',  { videoTotal, videoList })    
+  },
+
+  // 获取视频二级分类
+  async videoCateHandle (req, res) {
+    // 找出视频下的子分类
+    const videoCate = await CategoryModel.find({ parent: "5ef9a68208fb182c3c173e78" })
+    response(res, 0, '获取视频二级分类成功', videoCate)
+  },
+
+  // 获取视频详情
+  async videoItemHandle (req, res) {
+    const id = req.query.id
+    const [err, item] = await awaitWrap(VideoModel.findById(id))
+    // 查询出错
+    if (err) {
+      res.status(422).send('服务器查询出错~')
+      return
+    }
+    response(res, 0, '获取视频详情成功', item)         
   }
 
 }
