@@ -72,6 +72,8 @@ router.put('/video/update', handle.auth, handle.videoEditHandle)
 router.get('/video/cate', handle.auth, handle.videoCateHandle)
 router.get('/video/list', handle.auth, handle.videoListHandle)
 router.get('/video/item', handle.auth, handle.videoItemHandle)
+// 数据可视化
+router.get('/echarts', handle.auth, handle.echartsHandle)
 
 // 导出路由对象
 module.exports = router

@@ -642,6 +642,22 @@ module.exports = {
       return
     }
     response(res, 0, '获取视频详情成功', item)         
+  },
+
+  // echarts数据可视化
+  async echartsHandle (req, res) {
+    const equipTotal = await EquipModel.find().countDocuments()
+    const storeTotal = await StoreModel.find().countDocuments()
+    const articleTotal = await ArticleModel.find().countDocuments()
+    const videoTotal = await VideoModel.find().countDocuments()
+    const heroTotal = await HeroModel.find().countDocuments()
+    const adTotal = await AdModel.find().countDocuments()
+    const userTotal = await UserModel.find().countDocuments()
+    response(res, 0, '获取数据总数成功', [
+      equipTotal, storeTotal, 
+      articleTotal, videoTotal,
+      heroTotal, adTotal, userTotal
+    ])
   }
 
 }
