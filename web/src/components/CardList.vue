@@ -10,6 +10,6 @@
   }
 </script>
 
-<style lang="stylue" scoped>
+<style lang="stylus" scoped>
 
 </style>
