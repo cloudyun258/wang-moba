@@ -1,0 +1,74 @@
+// 混合方法文件
+
+// flex
+flex-align($row=space-between, $col=center, $wrap=nowrap)
+  display: flex
+  justify-content: $row
+  align-items: $col
+  flex-wrap: $wrap
+
+// 定位
+pos-base($pos=absolute, $left=0, $top=0,
+ $w=100%, $h=100%, $right=auto, $bottom=auto)
+  position: $pos
+  left: $left
+  right: $right
+  top: $top
+  bottom: $bottom
+  width: $w
+  height: $h
+
+// 精灵图
+spite-icon($w=0, $h=0, $x=0, $y=0, $url='../assets/images/icon/icon.png')
+  display: inline-block
+  width: $w
+  height: $h
+  background-image: url($url)
+  background-repeat: no-repeat
+  background-position: $x $y
+
+// 背景图片
+bg-img($w=0, $h=0, $size=contain, $url)
+  display: inline-block
+  width: $w
+  height: $h
+  background: url($url) no-repeat center
+  background-size: $size
+
+// 多行文本省略 (仅适用于 webkit 内核浏览器)
+text-ellipsis($row)
+  display: -webkit-box
+  overflow: hidden
+  -webkit-line-clamp: $row
+  -webkit-box-orient: vertical
+
+// 移动端1px底部边框
+border-bottom($color=#d4d9de)
+  position: relative
+  &:after
+    content: ''
+    position: absolute 
+    top: 0
+    left: 0
+    display: block
+    width: 100%
+    height: 1px
+    background-color: $color
+    transform: scaleY(0.5)
+
+// 移动端1px全边框
+border-all($color=#d4d9de)
+  position: relative
+  &:after
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    width: 200%
+    height: 200%
+    transform: scale(0.5)
+    transform-origin: top left
+    box-sizing: border-box
+    border: 1px solid $color
+    border-radius: 2px
+  

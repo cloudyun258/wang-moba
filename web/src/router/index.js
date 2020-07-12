@@ -8,16 +8,18 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('../views/Home')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About')
   }
 ]
 
 const router = new VueRouter({
   routes
 })
+
+// 禁止相同路由跳转时打印错误信息
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 
 export default router
