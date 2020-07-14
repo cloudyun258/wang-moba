@@ -19,21 +19,23 @@ pos-base($pos=absolute, $left=0, $top=0,
   height: $h
 
 // 精灵图
-spite-icon($w=0, $h=0, $x=0, $y=0, $url='../assets/images/icon/icon.png')
+spite-icon($w=0, $h=0, $x=0, $y=0, 
+$sx=37.5rem, $sy=45.5rem, $url='../assets/images/icon/icon.png')
   display: inline-block
   width: $w
   height: $h
   background-image: url($url)
   background-repeat: no-repeat
   background-position: $x $y
+  background-size: $sx $sy
 
 // 背景图片
-bg-img($w=0, $h=0, $size=contain, $url)
+bg-img($w=0, $h=0, $url, $sx=contain, $sy=contain)
   display: inline-block
   width: $w
   height: $h
   background: url($url) no-repeat center
-  background-size: $size
+  background-size: $sx $sy
 
 // 多行文本省略 (仅适用于 webkit 内核浏览器)
 text-ellipsis($row)

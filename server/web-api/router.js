@@ -7,7 +7,8 @@ const router = express.Router()
 
 // 注册路由规则
 router.use(express.static('public'))
-router.get('/test', handle.testHandle)
+
+router.get('/ads/home', handle.homeAdsHandle)
 
 
 // 导出路由对象

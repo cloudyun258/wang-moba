@@ -13,8 +13,14 @@ const routes = [
 
   {
     path: '/',
-    name: 'Home',
-    component: () => import('../views/Home')
+    name: 'Main',
+    redirect: '/home',
+    component: () => import('../views/Main'),
+    children: [
+      { path: 'home', name: 'home', component: () => import('../views/Home') },
+      { path: 'strategy', name: 'strategy', component: () => import('../views/Strategy') },
+      { path: 'match', name: 'match', component: () => import('../views/Match') }
+    ]
   }
 
 ]
