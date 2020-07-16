@@ -35,8 +35,9 @@ export default {
   @import "../assets/stylus/variable.styl"
   @import "../assets/stylus/mixins.styl"
   #main
+    padding-top: 4.5rem 
     .topbar
-      spite-icon(auto, 4.5rem, 0, -71.5rem, 75rem, 91rem)
+      sprite-icon(100%, 4.5rem, 0, -71.5rem, 75rem, 91rem)
       flex-align(flex-start)
       padding: 0 1.5rem
       .logo img
@@ -54,7 +55,7 @@ export default {
           font-size: $font-xxs
           color: $grey-66  
       .download
-        spite-icon(6rem, 2.4rem, -5.9rem, -30.9rem)
+        sprite-icon(6rem, 2.4rem, -5.9rem, -30.9rem)
     .nav
       flex-align(flex-start)
       background-color: $orange

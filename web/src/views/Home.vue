@@ -13,73 +13,73 @@
       <div class="icon" :class="{'down': !isIcon}">
         <div class="icon-item">
           <a href="https://pvp.qq.com/m/m201706/coming/index.htm" style="display: block">
-            <i class="spite spite-one"></i>
+            <i class="sprite sprite-one"></i>
             <div class="text">爆料站</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite spite-two"></i>
+            <i class="sprite sprite-two"></i>
             <div class="text">故事站</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite spite-three"></i>
+            <i class="sprite sprite-three"></i>
             <div class="text">周边商城</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite spite-four"></i>
+            <i class="sprite sprite-four"></i>
             <div class="text">体验服</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite spite-five"></i>
+            <i class="sprite sprite-five"></i>
             <div class="text">新人专区</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite spite-six"></i>
+            <i class="sprite sprite-six"></i>
             <div class="text">荣耀-传承</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite spite-seven"></i>
+            <i class="sprite sprite-seven"></i>
             <div class="text">王者营地</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite spite-eight"></i>
+            <i class="sprite sprite-eight"></i>
             <div class="text">公众号</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite bg-one"></i>
+            <i class="sprite bg-one"></i>
             <div class="text">版本介绍</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite bg-two"></i>
+            <i class="sprite bg-two"></i>
             <div class="text">对局环境</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite bg-three"></i>
+            <i class="sprite bg-three"></i>
             <div class="text">无限王者团</div>
           </a>
         </div>
         <div class="icon-item">
           <a href="javascript:;" style="display: block">
-            <i class="spite bg-four"></i>
+            <i class="sprite bg-four"></i>
             <div class="text">创意互动营</div>
           </a>
         </div>          
@@ -89,11 +89,13 @@
         <span class="fold-nane">收起</span>
       </div>
     </div>
+    <!-- end of icon -->
   </div>
 </template>
 
 <script>
   import  { fetchHomeAds } from '@/api/index'
+  import Card from '@/components/Card'
   export default {
     name: 'Home',
     data () {
@@ -127,6 +129,9 @@
         const res = await fetchHomeAds()
         this.homeAds = res.data
       }
+    },
+    components: {
+      'm-card': Card
     }
   }
 </script>
@@ -169,28 +174,28 @@
           pos-base(absolute, auto, 0, 1px, 100%, 0, auto)
           background-color: $grey-d4
           transform: scale(0.8)
-        .spite-one
-          spite-icon(2.3rem, 2.4rem, -22.4rem, -6.7rem)
-        .spite-two
-          spite-icon(2.3rem, 2.4rem, -31.8rem, -6.8rem)
-        .spite-three
-          spite-icon(1.9rem, 2.4rem, -13.1rem, -0.4rem)
-        .spite-four
-          spite-icon(2rem, 2.4rem, -3.7rem, -6.7rem)
-        .spite-five
-          spite-icon(2rem, 2.4rem, -31.9rem, -0.5rem)
-        .spite-six
-          spite-icon(2.4rem, 2.4rem, -12.8rem, -6.6rem)
-        .spite-seven
-          spite-icon(2.4rem, 2.4rem, -22.2rem, -0.4rem)
-        .spite-eight
-          spite-icon(2.4rem, 2.4rem, 0, -41.8rem)
+        .sprite-one
+          sprite-icon(2.3rem, 2.4rem, -22.4rem, -6.3rem)
+        .sprite-two
+          sprite-icon(2.3rem, 2.4rem, -31.8rem, -6.4rem)
+        .sprite-three
+          sprite-icon(1.9rem, 2.4rem, -13.1rem, -0.2rem)
+        .sprite-four
+          sprite-icon(2rem, 2.4rem, -3.7rem, -6.3rem)
+        .sprite-five
+          sprite-icon(2rem, 2.4rem, -31.9rem, -0.2rem)
+        .sprite-six
+          sprite-icon(2.4rem, 2.4rem, -12.8rem, -6.2rem)
+        .sprite-seven
+          sprite-icon(2.4rem, 2.4rem, -22.2rem, -0.4rem)
+        .sprite-eight
+          sprite-icon(2.4rem, 2.4rem, 0, -41.4rem)
         .bg-one
           bg-img(2.4rem, 2.4rem, "../assets/images/icon/version-icon.png", 2.4rem, 2.4rem)
         .bg-two
           bg-img(4rem, 2.4rem, "../assets/images/icon/djhj.png", 4rem, 2.4rem)   
         .bg-three
-          bg-img(5rem, 2.4rem, "../assets/images/icon/wxwzt.png", 5rem, 1.7rem)   
+          bg-img(5rem, 2.4rem, "../assets/images/icon/wxwzt.png", 5rem, 1.7rem, 0, 0.5rem)   
         .bg-four
           bg-img(2.4rem, 2.4rem, "../assets/images/icon/cyhdy.png", 2.4rem, 2.4rem)   
       .fold
@@ -199,7 +204,7 @@
         text-align: center   
         background-color: $white-f9
         .fold-icon
-          spite-icon(1rem, 1rem, -14.1rem, -23.2rem)
+          sprite-icon(1rem, 1rem, -14.1rem, -23.2rem)
           margin-right: 0.3rem
           &.down
             transform: rotateX(180deg) 
