@@ -17,6 +17,7 @@
     padding-top: 5rem
     text-align: center
     .back
+      font-size: $font-md
       padding: .6rem 2rem
       margin-top: 2.5rem
       color: $white

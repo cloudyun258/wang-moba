@@ -10,6 +10,7 @@
       </div>
       <div class="download"></div>
     </div>
+    <!-- end of topbar -->
     <div class="nav">
       <div class="nav-item">
         <router-link class="nav-link" to="/home">首页</router-link>
@@ -21,6 +22,7 @@
         <router-link class="nav-link" to="/match">赛事中心</router-link>
       </div>      
     </div>
+    <!-- end of nav -->
     <router-view></router-view>
   </div>
 </template>

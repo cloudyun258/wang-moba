@@ -10,7 +10,7 @@
     </div>
     <!-- end of swiper -->
     <div class="icon-wrap">
-      <div class="icon" :class="{'down': !isIcon}">
+      <div class="icon" :class="{'down': !foldIcon}">
         <div class="icon-item">
           <a href="https://pvp.qq.com/m/m201706/coming/index.htm" style="display: block">
             <i class="sprite sprite-one"></i>
@@ -84,24 +84,75 @@
           </a>
         </div>          
       </div> 
-      <div class="fold" @click="isIcon=!isIcon">
-        <i class="fold-icon" :class="{ 'down': !isIcon }"></i>
+      <div class="fold" @click="foldIcon=!foldIcon">
+        <i class="fold-icon" :class="{ 'down': !foldIcon }"></i>
         <span class="fold-nane">收起</span>
       </div>
     </div>
     <!-- end of icon -->
+    <m-card-list title="新闻资讯" icon="icon_news.jpg" :categories="newCats">
+      <template #item="{category}">
+        <div class="news-item" v-for="(item, index) in category.newsList" :key="index">
+          <div class="news-cate" :class="calcNewsClass(item.categoryName)">{{ item.categoryName }}</div>
+          <router-link tag="div" to="/home" class="news-title text-ellipsis">{{ item.title }}</router-link>
+          <div class="news-date">{{ item.date }}</div>
+        </div>
+      </template>
+    </m-card-list>
   </div>
 </template>
 
 <script>
   import  { fetchHomeAds } from '@/api/index'
-  import Card from '@/components/Card'
+  import CardList from '@/components/CardList'
   export default {
     name: 'Home',
     data () {
       return {
         homeAds: [], // 广告数据
-        isIcon: false, // 控制图标区域的展开
+        foldIcon: false, // 控制图标区域的展开
+        newCats: [
+          {
+            name: '热门',
+            newsList: new Array(5).fill({}).map(v => ({
+              categoryName: '公告',
+              title: '7月14日全服不停机更新公告',
+              date: '06/21'
+            }))
+          },
+          {
+            name: '新闻',
+            newsList: new Array(5).fill({}).map(v => ({
+              categoryName: '新闻',
+              title: '7月14日全服不停机更新公告',
+              date: '01/21'
+            }))
+          },
+          {
+            name: '活动',
+            newsList: new Array(5).fill({}).map(v => ({
+              categoryName: '活动',
+              title: '2020年王者荣耀世界冠军杯小组赛赛程出炉拉拉拉拉',
+              date: '07/21'
+            }))
+          },
+          {
+            name: '公告',
+            newsList: new Array(5).fill({}).map(v => ({
+              categoryName: '公告',
+              title: '7月14日全服不停机更新公告',
+              date: '09/21'
+            }))
+          },
+          {
+            name: '赛事',
+            newsList: new Array(5).fill({}).map(v => ({
+              categoryName: '赛事',
+              title: '7月14日全服不停机更新公告',
+              date: '12/21'
+            }))
+          }
+        ],
         swiperOptions: {
           // 小圆点
           pagination: {
@@ -128,10 +179,26 @@
       async fetchHomeAds () {
         const res = await fetchHomeAds()
         this.homeAds = res.data
+      },
+      // 计算新闻分类类名
+      calcNewsClass (categoryName) {
+        let className = ''
+        switch (categoryName) {
+          case '新闻': className = 'news-cate-one'
+            break
+          case '公告': className = 'news-cate-two'
+            break
+          case '活动': className = 'news-cate-three'
+            break
+          case '赛事': className = 'news-cate-four'
+            break
+          default: categoryName = 'news-cate-one'
+        }
+        return className
       }
     },
     components: {
-      'm-card': Card
+      'm-card-list': CardList
     }
   }
 </script>
@@ -140,17 +207,6 @@
   @import "../assets/stylus/variable.styl"
   @import "../assets/stylus/mixins.styl"
   #home
-    .swiper-pagination
-      text-align: right
-      box-sizing: border-box 
-      padding-right: 1.5rem
-      padding-bottom: .3rem
-      >>> .swiper-pagination-bullet
-        border-radius: 2px
-        background-color: $white
-        opacity: 1
-        &.swiper-pagination-bullet-active
-          background-color: $blue-4b 
     .icon-wrap
       margin-top: 1rem 
       padding-top: 1rem
@@ -208,6 +264,35 @@
           margin-right: 0.3rem
           &.down
             transform: rotateX(180deg) 
-
+    .news-item
+      flex-align(flex-start)
+      margin-bottom: 1.7rem
+      &:last-child
+        margin-bottom: 0  
+      .news-cate
+        font-size: $font-xxs 
+        padding: 0 0.3rem
+        margin-right: 1rem
+        margin-left: 0.15rem 
+        &.news-cate-one
+          border-all($green)
+          color: $green
+        &.news-cate-two
+          border-all($orange-f0)
+          color: $orange-f0 
+        &.news-cate-three
+          border-all($red)
+          color: $red
+        &.news-cate-four
+          border-all($blue-4d)
+          color: $blue-4d                             
+      .news-title
+        flex: 1
+        font-size: $font-md
+        color: $dark-22 
+      .news-date
+        margin-left: 0.7rem
+        font-size: $font-s
+        color: $grey-77
 
 </style>

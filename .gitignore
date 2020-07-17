@@ -6,7 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 /admin/server
 /admin/node_modules
-/admin/upload
 /server/node_modules
 /server/upload/video
 /web/node_modules
