@@ -19,14 +19,28 @@ const routes = [
     children: [
       { path: 'home', name: 'home', component: () => import('../views/Home') },
       { path: 'strategy', name: 'strategy', component: () => import('../views/Strategy') },
-      { path: 'match', name: 'match', component: () => import('../views/Match') }
+      { path: 'match', name: 'match', component: () => import('../views/Match') },
+      { 
+        path: 'article/detail/:id', 
+        name: 'article-detail', 
+        props: true,
+        component: () => import('../views/ArticleDetail') 
+      }
     ]
   }
 
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  // 路由改变时滚动到顶部，而返回上一级时滚动到之前位置
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })
 
 // 禁止相同路由跳转时打印错误信息

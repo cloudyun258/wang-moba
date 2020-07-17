@@ -8,3 +8,21 @@ export function fetchHomeAds (params) {
     params
   })
 }
+
+// 首页新闻数据
+export function fetchNewsListOne (params) {
+  return request({
+    url: '/news/listOne',
+    method: 'get',
+    params
+  })
+}
+
+// 首页新闻数据
+export function fetchArticle (params) {
+  return request({
+    url: '/article/item',
+    method: 'get',
+    params
+  })
+}

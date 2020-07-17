@@ -90,12 +90,12 @@
       </div>
     </div>
     <!-- end of icon -->
-    <m-card-list title="新闻资讯" icon="icon_news.jpg" :categories="newCats">
+    <m-card-list title="新闻资讯" icon="icon_news.jpg" :categories="newsList">
       <template #item="{category}">
         <div class="news-item" v-for="(item, index) in category.newsList" :key="index">
           <div class="news-cate" :class="calcNewsClass(item.categoryName)">{{ item.categoryName }}</div>
-          <router-link tag="div" to="/home" class="news-title text-ellipsis">{{ item.title }}</router-link>
-          <div class="news-date">{{ item.date }}</div>
+          <router-link tag="div" :to="`/article/detail/${item._id}`" class="news-title text-ellipsis">{{ item.title }}</router-link>
+          <div class="news-date">{{ item.date | formatDate }}</div>
         </div>
       </template>
     </m-card-list>
@@ -103,7 +103,7 @@
 </template>
 
 <script>
-  import  { fetchHomeAds } from '@/api/index'
+  import  { fetchHomeAds, fetchNewsListOne } from '@/api/index'
   import CardList from '@/components/CardList'
   export default {
     name: 'Home',
@@ -111,48 +111,7 @@
       return {
         homeAds: [], // 广告数据
         foldIcon: false, // 控制图标区域的展开
-        newCats: [
-          {
-            name: '热门',
-            newsList: new Array(5).fill({}).map(v => ({
-              categoryName: '公告',
-              title: '7月14日全服不停机更新公告',
-              date: '06/21'
-            }))
-          },
-          {
-            name: '新闻',
-            newsList: new Array(5).fill({}).map(v => ({
-              categoryName: '新闻',
-              title: '7月14日全服不停机更新公告',
-              date: '01/21'
-            }))
-          },
-          {
-            name: '活动',
-            newsList: new Array(5).fill({}).map(v => ({
-              categoryName: '活动',
-              title: '2020年王者荣耀世界冠军杯小组赛赛程出炉拉拉拉拉',
-              date: '07/21'
-            }))
-          },
-          {
-            name: '公告',
-            newsList: new Array(5).fill({}).map(v => ({
-              categoryName: '公告',
-              title: '7月14日全服不停机更新公告',
-              date: '09/21'
-            }))
-          },
-          {
-            name: '赛事',
-            newsList: new Array(5).fill({}).map(v => ({
-              categoryName: '赛事',
-              title: '7月14日全服不停机更新公告',
-              date: '12/21'
-            }))
-          }
-        ],
+        newsList: [],   // 新闻数据 
         swiperOptions: {
           // 小圆点
           pagination: {
@@ -173,12 +132,18 @@
     },
     mounted () {
       this.fetchHomeAds()
+      this.fetchNewsListOne()
     },
     methods: {
       // 获取轮播广告数据
       async fetchHomeAds () {
         const res = await fetchHomeAds()
         this.homeAds = res.data
+      },
+      // 获取新闻数据
+      async fetchNewsListOne () {
+        const res = await fetchNewsListOne()
+        this.newsList = res.data
       },
       // 计算新闻分类类名
       calcNewsClass (categoryName) {
@@ -291,7 +256,7 @@
         font-size: $font-md
         color: $dark-22 
       .news-date
-        margin-left: 0.7rem
+        margin-left: 1rem
         font-size: $font-s
         color: $grey-77
 
