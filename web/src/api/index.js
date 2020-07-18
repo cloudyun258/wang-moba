@@ -18,7 +18,16 @@ export function fetchNewsListOne (params) {
   })
 }
 
-// 首页新闻数据
+// 新闻列表数据
+export function fetchNewsListTwo (params) {
+  return request({
+    url: '/news/listTwo',
+    method: 'get',
+    params
+  })
+}
+
+// 文章详情
 export function fetchArticle (params) {
   return request({
     url: '/article/item',

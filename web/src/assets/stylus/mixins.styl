@@ -60,6 +60,20 @@ border-bottom($color=#d4d9de)
     background-color: $color
     transform: scaleY(0.5)
 
+// 移动端1px顶部边框
+border-top($color=#d4d9de)
+  position: relative
+  &:after
+    content: ''
+    position: absolute 
+    top: 0
+    left: 0
+    display: block
+    width: 100%
+    height: 1px
+    background-color: $color
+    transform: scaleY(0.5)
+
 // 移动端1px全边框
 border-all($color=#d4d9de)
   position: relative

@@ -14,6 +14,8 @@ router.get('/ads/home', handle.homeAdsHandle)
 router.get('/news/listOne', handle.newsListOneHandle)
 // 文章详情
 router.get('/article/item', handle.articleItemHandle)
+// 新闻列表
+router.get('/news/listTwo', handle.newsListTwoHandle)
 
 
 // 导出路由对象

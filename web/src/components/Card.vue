@@ -4,7 +4,7 @@
       <div class="header">
         <i class="icon" :style="{ backgroundImage: iconUrl }"></i>
         <div class="title">{{ title }}</div>
-        <i class="more" v-if="more"></i>
+        <i class="more" v-if="more" @click="showMore"></i>
       </div>
       <slot name="banner"></slot>
    </div>
@@ -27,6 +27,21 @@
       // 头部 Icon 资源路径
       iconUrl () {
         return 'url(' + require(`../assets/images/icon/${this.icon}`) + ')'
+      }
+    },
+    methods: {
+      // 点击查看更多跳转不同路由
+      showMore () {
+        let path = ''
+        switch (this.title) {
+          case '新闻资讯': path = '/newsList'
+            break
+          case '英雄列表': path = '/heroList'
+            break
+          case '精彩视频': path = '/strategy'
+            break
+        }
+        this.$router.push(path)
       }
     }
   }

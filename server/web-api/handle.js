@@ -11,11 +11,13 @@ const awaitWrap = require('../utils/error')
 
  // 这里写对应路由的处理函数
 module.exports = {
+
   // 首页广告
   async homeAdsHandle (req, res) {
     const homeAds = await AdModel.findById('5f01cd39ccc2353e881d827a')
     response(res, 0, '获取首页广告数据成功', homeAds.items)
   },
+
   // 首页新闻数据
   async newsListOneHandle (req, res) {
     // 查询新闻二级分类，以及属于该分类下的所有文章, 每个二级分类取前5篇文章
@@ -53,6 +55,7 @@ module.exports = {
 
     response(res, 0, '获取首页新闻数据成功', catesData)
   },
+
   // 文章详情
   async articleItemHandle (req, res) {
     const item = await ArticleModel.findById(req.query.id).lean()
@@ -74,5 +77,55 @@ module.exports = {
     item.related.push(related[r1])
     item.related.push(related[r2])
     response(res, 0, '获取文章详情成功', item)
+  },
+
+  // 文章列表
+  async newsListTwoHandle (req, res) {
+    // 获取前端传过来的参数
+    let { newsType, page, pageSize } = req.query
+    // 参数处理
+    page = Number(page) ? Number(page) : 1
+    pageSize = Number(pageSize) ? Number(pageSize) : 8
+    const skip = (page - 1) * pageSize
+
+    // 返回的新闻列表数据
+    let newsList = []
+    // 是否有下一页
+    let hasNext  = true 
+
+    if (newsType === '热门') {
+      newsList = await ArticleModel.find().where({ hot: true })
+      .populate('categories').skip(skip).limit(pageSize).lean()
+      // 热门的新闻总数
+      let newsTotal = await ArticleModel.find().where({ hot: true }).countDocuments()
+      // 没有下一页
+      if ((skip + newsList.length) >= newsTotal) {
+        hasNext = false
+      }
+      // 给每篇文章添加categoryName字段
+      newsList.forEach(news => {
+        news.categoryName = news.categories[news.categories.length - 1].name
+      })
+    } else {
+      // 先把对应分类信息查出来
+      const category = await CategoryModel.findOne().where({ name: newsType })
+      // 根据分类的id取查找对应文章
+      newsList = await ArticleModel.find().where({
+        categories: { $in: [category._id] }
+      }).populate('categories').skip(skip).limit(pageSize).lean()
+
+      // 当前分类的新闻总数
+      let newsTotal = await ArticleModel.find().where({
+        categories: { $in: [category._id] }
+      }).countDocuments()
+      // 没有下一页
+      if ((skip + newsList.length) >= newsTotal) {
+        hasNext = false
+      }
+      // 给每篇文章添加categoryName字段
+      newsList.forEach(news => { news.categoryName = newsType })
+    }
+    response(res, 0, '获取新闻列表成功', { newsList, hasNext })
   }
+
 }
