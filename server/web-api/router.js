@@ -18,6 +18,8 @@ router.get('/article/item', handle.articleItemHandle)
 router.get('/news/listTwo', handle.newsListTwoHandle)
 // 首页英雄数据
 router.get('/hero/listOne', handle.HeroListOneHandle)
+// 英雄列表
+router.get('/hero/listTwo', handle.HeroListTwoHandle)
 
 
 // 导出路由对象

@@ -44,3 +44,13 @@ export function fetchHeroListOne (params) {
     params
   })
 }
+
+// 英雄列表数据
+export function fetchHeroListTwo (params) {
+  return request({
+    url: '/hero/listTwo',
+    method: 'get',
+    params
+  })
+}
+

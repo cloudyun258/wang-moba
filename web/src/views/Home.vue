@@ -170,7 +170,6 @@
       // 获取英雄数据
       async fetchHeroListOne () {
         const res = await fetchHeroListOne()
-        console.log(res.data)
         this.heroList = res.data
       },
       // 计算新闻分类类名

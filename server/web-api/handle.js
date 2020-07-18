@@ -149,6 +149,26 @@ module.exports = {
       heroList: await HeroModel.find().where({ hot: true }).limit(10)
     })
     response(res, 0, '获取首页英雄数据成功', catesData)
+  },
+
+  // 英雄列表数据
+  async HeroListTwoHandle (req, res) {
+    let { heroType } = req.query
+    // 返回的英雄数据
+    let heroList = []
+
+    if (heroType === '全部') {
+      heroList = await HeroModel.find()
+    } else {
+      // 先把对应分类信息查出来
+      const category = await CategoryModel.findOne().where({ name: heroType })
+      // 根据分类的id取查找对应文章
+      heroList = await HeroModel.find().where({
+        categories: { $in: [category._id] }
+      })
+    }
+
+    response(res, 0, '获取英雄列表成功', heroList)
   }
 
 }
