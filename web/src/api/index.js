@@ -63,3 +63,12 @@ export function fetchVideoListOne (params) {
   })
 }
 
+// 获取视频详情
+export function fetchVideo (params) {
+  return request({
+    url: '/video/item',
+    method: 'get',
+    params
+  })
+}
+

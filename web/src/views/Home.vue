@@ -121,7 +121,10 @@
     <m-card-list title="精彩视频" icon="icon_video.png" :categories="videoList">
       <template #item="{category}">
         <div class="video">
-          <div class="video-item" v-for="(item, index) in category.videoList" :key="index">
+          <div class="video-item"
+            v-for="(item, index) in category.videoList" 
+            @click="$router.push(`/videoPlay/${item._id}`)"
+            :key="index">
             <div class="video-cover">
               <img :src="item.cover" class="cover" alt="cover">
             </div>
@@ -196,7 +199,6 @@
       // 获取视频数据
       async fetchVideoListOne () {
         const res = await fetchVideoListOne()
-        console.log(res.data)
         this.videoList = res.data
       },
       // 计算新闻分类类名

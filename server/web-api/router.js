@@ -22,6 +22,8 @@ router.get('/hero/listOne', handle.heroListOneHandle)
 router.get('/hero/listTwo', handle.heroListTwoHandle)
 // 首页英雄数据
 router.get('/video/listOne', handle.videoListOneHandle)
+// 视频详情
+router.get('/video/item', handle.videoItemHandle)
 
 
 // 导出路由对象

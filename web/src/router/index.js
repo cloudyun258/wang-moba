@@ -35,7 +35,13 @@ const routes = [
         path: 'heroList', 
         name: 'hero-list', 
         component: () => import('../views/HeroList') 
-      }
+      },
+      { 
+        path: 'videoPlay/:id', 
+        name: 'video-play', 
+        props: true,
+        component: () => import('../views/VideoPlay') 
+      }      
     ]
   }
 

@@ -5,6 +5,7 @@ const AdModel = require('../models/ad')
 const CategoryModel = require('../models/category')
 const ArticleModel = require('../models/article')
 const HeroModel = require('../models/hero')
+const VideoModel = require('../models/video')
 
 const response = require('../utils/response')
 const random = require('../utils/random')
@@ -186,6 +187,13 @@ module.exports = {
       },
     ])
     response(res, 0, '获取首页视频数据成功', catesData)
+  },
+
+  // 视频详情 
+  async videoItemHandle (req, res) {
+    const { id } = req.query
+    const item = await VideoModel.findById(id)
+    response(res, 0, '获取视频详情成功', item)
   }
 
 }
