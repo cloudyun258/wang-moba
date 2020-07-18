@@ -118,12 +118,31 @@
       </template>
     </m-card-list>
     <!-- end of heroCard -->
-    <p style="margin: 100px 0"></p>
+    <m-card-list title="精彩视频" icon="icon_video.png" :categories="videoList">
+      <template #item="{category}">
+        <div class="video">
+          <div class="video-item" v-for="(item, index) in category.videoList" :key="index">
+            <div class="video-cover">
+              <img :src="item.cover" class="cover" alt="cover">
+            </div>
+            <div class="video-title">{{ item.title }}</div>
+            <div class="video-info">
+              <i class="icon-play"></i>
+              <span class="play">{{ item.play }}</span>
+              <span class="date">{{ item.date | formatDateThree }}</span>
+            </div>
+          </div>
+        </div>
+      </template>      
+    </m-card-list>
+    <!-- end of videoCard -->
+    <router-link tag="div" to="/strategy" class="loading-more">加载更多内容</router-link>
   </div>
 </template>
 
 <script>
-  import  { fetchHomeAds, fetchNewsListOne, fetchHeroListOne} from '@/api/index'
+  import  { fetchHomeAds, fetchNewsListOne, fetchHeroListOne,
+          fetchVideoListOne } from '@/api/index'
   import CardList from '@/components/CardList'
   export default {
     name: 'Home',
@@ -133,6 +152,7 @@
         foldIcon: false, // 控制图标区域的展开
         newsList: [],   // 新闻数据 
         heroList: [],   // 英雄数据
+        videoList: [],  // 视频数据
         swiperOptions: {
           // 小圆点
           pagination: {
@@ -155,6 +175,7 @@
       this.fetchHomeAds()
       this.fetchNewsListOne()
       this.fetchHeroListOne()
+      this.fetchVideoListOne()
     },
     methods: {
       // 获取轮播广告数据
@@ -171,6 +192,12 @@
       async fetchHeroListOne () {
         const res = await fetchHeroListOne()
         this.heroList = res.data
+      },
+      // 获取视频数据
+      async fetchVideoListOne () {
+        const res = await fetchVideoListOne()
+        console.log(res.data)
+        this.videoList = res.data
       },
       // 计算新闻分类类名
       calcNewsClass (categoryName) {
@@ -314,5 +341,49 @@
           line-height: 2rem
           font-size: $font-s
           color: $dark-22
-
+    .video
+      flex-align(flex-start, flex-start, wrap)
+      margin: 0 -0.4rem
+      .video-item
+        width: 50%
+        padding: .4rem
+        padding-bottom: 0
+        margin-bottom: 1.3rem 
+        box-sizing: border-box 
+        .video-cover
+          position: relative
+          width: 100%
+          height: 10.2rem 
+          .cover
+            pos-base()
+            width: 100%
+            height: 10.2rem 
+        .video-title
+          margin-top: 1rem
+          margin-bottom: 0.5rem
+          color: $dark-22
+          line-height: 1.7em 
+          font-size: $font-sm 
+          text-ellipsis(2) 
+        .video-info
+          .icon-play
+            sprite-icon(1.2rem, 0.9rem, -11.7rem, -23.4rem)
+            margin: 0 0.7rem
+          .play
+            font-size: $font-xxs
+            color: $grey-7a
+          .date
+            float: right
+            font-size: $font-xxs
+            color: $grey-7a
+    .loading-more
+      position: relative
+      z-index: 9999 
+      text-align: center
+      background-color: $white
+      margin-top: -0.2rem
+      height: 3.5rem
+      line-height: 3.5rem
+      color: $grey-7a  
+        
 </style>

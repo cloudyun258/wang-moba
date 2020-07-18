@@ -19,6 +19,9 @@ Vue.filter('formatDate', (date) => {
 Vue.filter('formatDateTwo', (date) => {
   return dayjs(Number(date)).format('YYYY-MM-DD')
 })
+Vue.filter('formatDateThree', (date) => {
+  return dayjs(Number(date)).format('MM-DD')
+})
 
 Vue.config.productionTip = false
 

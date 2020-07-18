@@ -130,7 +130,7 @@ module.exports = {
   },
 
   //首页英雄数据
-  async HeroListOneHandle (req, res) {
+  async heroListOneHandle (req, res) {
     // 查询英雄二级分类，以及属于该分类下的所有英雄
     const catesData = await CategoryModel.aggregate([
       { $match: { parent: mongoose.Types.ObjectId('5ef9a67208fb182c3c173e77') } },
@@ -152,7 +152,7 @@ module.exports = {
   },
 
   // 英雄列表数据
-  async HeroListTwoHandle (req, res) {
+  async heroListTwoHandle (req, res) {
     let { heroType } = req.query
     // 返回的英雄数据
     let heroList = []
@@ -169,6 +169,23 @@ module.exports = {
     }
 
     response(res, 0, '获取英雄列表成功', heroList)
+  },
+
+  // 首页视频数据
+  async videoListOneHandle (req, res) {
+    // 查询英雄二级分类，以及属于该分类下的所有英雄
+    const catesData = await CategoryModel.aggregate([
+      { $match: { parent: mongoose.Types.ObjectId('5ef9a68208fb182c3c173e78') } },
+      {
+        $lookup: {
+          from: 'videos',
+          localField: '_id',
+          foreignField: 'category',
+          as: 'videoList'
+        }
+      },
+    ])
+    response(res, 0, '获取首页视频数据成功', catesData)
   }
 
 }

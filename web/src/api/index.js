@@ -54,3 +54,12 @@ export function fetchHeroListTwo (params) {
   })
 }
 
+// 首页视频数据
+export function fetchVideoListOne (params) {
+  return request({
+    url: '/video/listOne',
+    method: 'get',
+    params
+  })
+}
+
