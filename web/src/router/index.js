@@ -30,6 +30,11 @@ const routes = [
         path: 'newsList', 
         name: 'news-list', 
         component: () => import('../views/NewsList') 
+      },
+      { 
+        path: 'heroList', 
+        name: 'hero-list', 
+        component: () => import('../views/HeroList') 
       }
     ]
   }

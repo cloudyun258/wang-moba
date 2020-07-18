@@ -35,3 +35,12 @@ export function fetchArticle (params) {
     params
   })
 }
+
+// 首页英雄数据
+export function fetchHeroListOne (params) {
+  return request({
+    url: '/hero/listOne',
+    method: 'get',
+    params
+  })
+}

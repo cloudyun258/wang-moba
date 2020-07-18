@@ -42,6 +42,8 @@
       return {
         active: 0,
         options: {
+          // 每个swiper项高度自动撑开
+          autoHeight: true,
           on: {
             // swiper从当前slide开始过渡到另一个slide时执行
             slideChangeTransitionStart: () => {
@@ -88,5 +90,5 @@
     .items
       padding-top: 1.5rem
       padding-bottom: 1rem
-
+      
 </style>

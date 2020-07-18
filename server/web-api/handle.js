@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const AdModel = require('../models/ad')
 const CategoryModel = require('../models/category')
 const ArticleModel = require('../models/article')
+const HeroModel = require('../models/hero')
 
 const response = require('../utils/response')
 const random = require('../utils/random')
@@ -126,6 +127,28 @@ module.exports = {
       newsList.forEach(news => { news.categoryName = newsType })
     }
     response(res, 0, '获取新闻列表成功', { newsList, hasNext })
+  },
+
+  //首页英雄数据
+  async HeroListOneHandle (req, res) {
+    // 查询英雄二级分类，以及属于该分类下的所有英雄
+    const catesData = await CategoryModel.aggregate([
+      { $match: { parent: mongoose.Types.ObjectId('5ef9a67208fb182c3c173e77') } },
+      {
+        $lookup: {
+          from: 'heros',
+          localField: '_id',
+          foreignField: 'categories',
+          as: 'heroList'
+        }
+      },
+    ])
+    // 添加一个热门分类, 
+    catesData.unshift({
+      name: '热门',
+      heroList: await HeroModel.find().where({ hot: true }).limit(10)
+    })
+    response(res, 0, '获取首页英雄数据成功', catesData)
   }
 
 }

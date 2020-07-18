@@ -99,11 +99,31 @@
         </div>
       </template>
     </m-card-list>
+    <!-- end of newsCard -->
+    <m-card-list title="英雄列表" icon="icon_hero.jpg" :categories="heroList">
+      <template v-slot:banner>
+        <div class="banner">
+          <img src="../assets/images/new_hero.jpg" alt="new_hero">
+        </div>
+      </template>
+      <template #item="{category}">
+        <div class="hero">
+          <div class="hero-item" v-for="(item, index) in category.heroList" :key="index">
+            <div class="hero-avatar">
+              <img :src="item.avatar" class="avatar" alt="avatar">
+            </div>
+            <div class="hero-name">{{ item.name }}</div>
+          </div>
+        </div>
+      </template>
+    </m-card-list>
+    <!-- end of heroCard -->
+    <p style="margin: 100px 0"></p>
   </div>
 </template>
 
 <script>
-  import  { fetchHomeAds, fetchNewsListOne } from '@/api/index'
+  import  { fetchHomeAds, fetchNewsListOne, fetchHeroListOne} from '@/api/index'
   import CardList from '@/components/CardList'
   export default {
     name: 'Home',
@@ -112,6 +132,7 @@
         homeAds: [], // 广告数据
         foldIcon: false, // 控制图标区域的展开
         newsList: [],   // 新闻数据 
+        heroList: [],   // 英雄数据
         swiperOptions: {
           // 小圆点
           pagination: {
@@ -133,6 +154,7 @@
     mounted () {
       this.fetchHomeAds()
       this.fetchNewsListOne()
+      this.fetchHeroListOne()
     },
     methods: {
       // 获取轮播广告数据
@@ -144,6 +166,12 @@
       async fetchNewsListOne () {
         const res = await fetchNewsListOne()
         this.newsList = res.data
+      },
+      // 获取英雄数据
+      async fetchHeroListOne () {
+        const res = await fetchHeroListOne()
+        console.log(res.data)
+        this.heroList = res.data
       },
       // 计算新闻分类类名
       calcNewsClass (categoryName) {
@@ -259,5 +287,33 @@
         margin-left: 1rem
         font-size: $font-s
         color: $grey-77
+    
+    .banner
+      margin-top: 1.5rem
+      img
+        display: block
+        width: 100%
+    .hero
+      flex-align(flex-start, flex-start, wrap)
+      margin: 0 -0.7rem
+      .hero-item
+        width: 20%
+        text-align: center
+        padding: .7rem
+        padding-bottom: 0
+        box-sizing: border-box 
+        .hero-avatar
+          position: relative
+          width: 100%
+          padding-bottom: 100%
+          .avatar
+            pos-base()
+        .hero-name
+          margin-top: 0.5rem 
+          margin-bottom: 0.2rem 
+          height: 2rem
+          line-height: 2rem
+          font-size: $font-s
+          color: $dark-22
 
 </style>
