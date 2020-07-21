@@ -54,19 +54,19 @@ export function fetchHeroListTwo (params) {
   })
 }
 
-// 首页视频数据
-export function fetchVideoListOne (params) {
+// 英雄详情
+export function fetchHero (params) {
   return request({
-    url: '/video/listOne',
+    url: '/hero/item',
     method: 'get',
     params
   })
 }
 
-// 获取视频详情
-export function fetchVideo (params) {
+// 首页视频数据
+export function fetchVideoListOne (params) {
   return request({
-    url: '/video/item',
+    url: '/video/listOne',
     method: 'get',
     params
   })

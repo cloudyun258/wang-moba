@@ -108,12 +108,12 @@
       </template>
       <template #item="{category}">
         <div class="hero">
-          <div class="hero-item" v-for="(item, index) in category.heroList" :key="index">
+          <router-link tag="div" :to="`/hero/detail/${item._id}`" class="hero-item" v-for="(item, index) in category.heroList" :key="index">
             <div class="hero-avatar">
               <img :src="item.avatar" class="avatar" alt="avatar">
             </div>
             <div class="hero-name">{{ item.name }}</div>
-          </div>
+          </router-link>
         </div>
       </template>
     </m-card-list>
@@ -123,7 +123,7 @@
         <div class="video">
           <div class="video-item"
             v-for="(item, index) in category.videoList" 
-            @click="$router.push(`/videoPlay/${item._id}`)"
+            @click="videoPlay(item)"
             :key="index">
             <div class="video-cover">
               <img :src="item.cover" class="cover" alt="cover">
@@ -200,6 +200,12 @@
       async fetchVideoListOne () {
         const res = await fetchVideoListOne()
         this.videoList = res.data
+      },
+      // 跳转到视频播放页
+      videoPlay (item) {
+        // 保存视频数据到本地
+        localStorage.setItem('video', JSON.stringify(item))
+        this.$router.push('/videoPlay')
       },
       // 计算新闻分类类名
       calcNewsClass (categoryName) {

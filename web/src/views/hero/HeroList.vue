@@ -53,8 +53,8 @@
 </script>
 
 <style lang="stylus" scoped>
-  @import "../assets/stylus/variable.styl"
-  @import "../assets/stylus/mixins.styl"
+  @import "../../assets/stylus/variable.styl"
+  @import "../../assets/stylus/mixins.styl"
   #hero-list
     padding: 0 1.2rem
     .nav

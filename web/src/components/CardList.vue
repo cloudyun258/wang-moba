@@ -1,5 +1,5 @@
 <template>
-  <div id="card-list">
+  <div class="card-list">
     <m-card :title="title" :icon="icon" :more="more">
       <template v-slot:banner>
         <slot name="banner"></slot>
@@ -71,7 +71,7 @@
 <style lang="stylus" scoped>
   @import "../assets/stylus/variable.styl"
   @import "../assets/stylus/mixins.styl"
-  #card-list
+  .card-list
     .nav
       flex-align()
       font-size: $font-sm

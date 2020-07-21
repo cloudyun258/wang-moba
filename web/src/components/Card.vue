@@ -1,5 +1,5 @@
 <template>
-  <div id="card">
+  <div class="card">
     <div class="card-header" :class="{ 'border': more }">
       <div class="header">
         <i class="icon" :style="{ backgroundImage: iconUrl }"></i>
@@ -50,7 +50,7 @@
 <style lang="stylus" scoped>
   @import "../assets/stylus/variable.styl"
   @import "../assets/stylus/mixins.styl"
-  #card
+  .card
     background-color: $white
     margin-top: 1rem
     padding: 0 1.7rem

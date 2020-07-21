@@ -12,9 +12,15 @@
     <!-- end of nav -->
     <div class="news">
       <div class="news-item" v-for="(item, index) in newsList" :key="index">
-        <div class="news-cate" :class="calcNewsClass(item.categoryName)">{{ item.categoryName }}</div>
-        <router-link tag="div" :to="`/article/detail/${item._id}`" 
-        class="news-title text-ellipsis">{{ item.title }}</router-link>
+        <div class="news-cate" :class="calcNewsClass(item.categoryName)">
+          {{ item.categoryName }}
+        </div>
+        <router-link 
+          tag="div" 
+          :to="`/article/detail/${item._id}`" 
+          class="news-title text-ellipsis">
+          {{ item.title }}
+        </router-link>
         <div class="news-date">{{ item.date | formatDateTwo }}</div>
       </div>
     </div>

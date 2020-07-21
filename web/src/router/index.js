@@ -34,15 +34,39 @@ const routes = [
       { 
         path: 'heroList', 
         name: 'hero-list', 
-        component: () => import('../views/HeroList') 
+        component: () => import('../views/hero/HeroList') 
       },
       { 
-        path: 'videoPlay/:id', 
+        path: 'videoPlay', 
         name: 'video-play', 
-        props: true,
         component: () => import('../views/VideoPlay') 
       }      
     ]
+  },
+  
+  {
+    path: '/hero/detail/:id',
+    name: 'hero-detail',
+    props: true,
+    component: () => import('../views/hero/HeroDetail') 
+  },
+
+  {
+    path: '/more/heroList',
+    name: 'more-hero-list',
+    component: () => import('../views/hero/HeroList') 
+  },
+
+  {
+    path: '/heroSkin',
+    name: 'hero-skin',
+    component: () => import('../views/hero/HeroSkin') 
+  },
+
+  {
+    path: '/heroShow',
+    name: 'hero-show',
+    component: () => import('../views/hero/HeroShow') 
   }
 
 ]

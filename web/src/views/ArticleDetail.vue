@@ -1,5 +1,5 @@
 <template>
-  <div id="article-detail" v-if="articleDetail">
+  <div id="article-detail">
     <div class="header">
       <div class="back" @click="$router.go(-1)">
         <img src="../assets/images/backBg.png" alt="back">
@@ -35,7 +35,7 @@
     props: ['id'],
     data () {
       return {
-        articleDetail: null
+        articleDetail: {}
       }
     },
     watch: {

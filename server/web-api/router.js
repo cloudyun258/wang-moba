@@ -18,12 +18,13 @@ router.get('/article/item', handle.articleItemHandle)
 router.get('/news/listTwo', handle.newsListTwoHandle)
 // 首页英雄数据
 router.get('/hero/listOne', handle.heroListOneHandle)
+// 英雄详情
+router.get('/hero/item', handle.heroItemHandle)
 // 英雄列表
 router.get('/hero/listTwo', handle.heroListTwoHandle)
-// 首页英雄数据
+// 首页视频数据
 router.get('/video/listOne', handle.videoListOneHandle)
-// 视频详情
-router.get('/video/item', handle.videoItemHandle)
+
 
 
 // 导出路由对象

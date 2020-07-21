@@ -41,10 +41,6 @@ export default {
     .topbar
       sprite-icon(100%, 4.5rem, 0, -71.5rem, 75rem, 91rem)
       flex-align(flex-start)
-      padding: 0 1.5rem
-      .logo img
-        display: block
-        width: 3rem 
       .text 
         flex: 1
         color: $white

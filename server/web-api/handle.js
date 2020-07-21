@@ -152,6 +152,36 @@ module.exports = {
     response(res, 0, '获取首页英雄数据成功', catesData)
   },
 
+  // 英雄详情
+  async heroItemHandle (req, res) {
+    const { id } = req.query
+    /* 
+      关联查询出该英雄所有关联的详细数据, 由于英雄关系的三个字段不是直接关联英雄表,
+      而是其每一子项里面的hero字段关联英雄表, 所以需要
+      两级的populate查询才行, 
+      populate({
+        path: 'partners',  // 表示最外层的字段
+        populate: { path: 'hero', select: 'avatar' }  // select表示需取avatar字段
+      })
+    */
+    const item = await HeroModel.findById(id)
+      .populate('categories').populate('luckyEquip').populate('shitEquip')
+      .populate('storeRecommend')
+      .populate({
+        path: 'partners',
+        populate: { path: 'hero', select: 'avatar' }
+      })
+      .populate({
+        path: 'enemies',
+        populate: { path: 'hero', select: 'avatar' }
+      })
+      .populate({
+        path: 'preies',
+        populate: { path: 'hero', select: 'avatar' }
+      })
+    response(res, 0, '获取英雄详情成功', item)
+  },
+
   // 英雄列表数据
   async heroListTwoHandle (req, res) {
     let { heroType } = req.query
@@ -188,12 +218,5 @@ module.exports = {
     ])
     response(res, 0, '获取首页视频数据成功', catesData)
   },
-
-  // 视频详情 
-  async videoItemHandle (req, res) {
-    const { id } = req.query
-    const item = await VideoModel.findById(id)
-    response(res, 0, '获取视频详情成功', item)
-  }
 
 }
