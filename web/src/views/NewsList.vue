@@ -21,7 +21,7 @@
           class="news-title text-ellipsis">
           {{ item.title }}
         </router-link>
-        <div class="news-date">{{ item.date | formatDateTwo }}</div>
+        <div class="news-date">{{ item.date | formatDate('YYYY-MM-DD') }}</div>
       </div>
     </div>
     <!-- end of news -->
@@ -53,7 +53,7 @@
       this.fetchNewsListTwo()
     },
     methods: {
-      // 获取新闻数据
+      // 获取新闻数据, 用于动态渲染导航
       async fetchNewsListOne () {
         const res = await fetchNewsListOne()
         this.catesList = res.data
@@ -67,6 +67,8 @@
       },
       // 切换新闻类型
       toggleNav (index, newsType) {
+        // 如果点击的是当前导航，什么都不做
+        if (this.active == index) return
         this.active = index
         this.page = 1
         this.newsType = newsType
@@ -76,9 +78,7 @@
       // 获取下一页数据
       fetchNext () {
         // 没有下一页
-        if (!this.hasNext) {
-          return
-        }
+        if (!this.hasNext) return
         this.page = this.page + 1
         this.fetchNewsListTwo()
       },

@@ -20,11 +20,16 @@ router.get('/news/listTwo', handle.newsListTwoHandle)
 router.get('/hero/listOne', handle.heroListOneHandle)
 // 英雄详情
 router.get('/hero/item', handle.heroItemHandle)
+// 英雄列表分类
+router.get('/hero/cate', handle.heroCateHandle)
 // 英雄列表
 router.get('/hero/listTwo', handle.heroListTwoHandle)
 // 首页视频数据
 router.get('/video/listOne', handle.videoListOneHandle)
-
+// 赛事中心二级分类
+router.get('/match/cate', handle.matchCateHandle)
+// 赛事中心文章
+router.get('/match/article', handle.matchArticleHandle)
 
 
 // 导出路由对象

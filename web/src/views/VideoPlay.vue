@@ -13,8 +13,8 @@
       <div class="sign">个性签名: 这个人很懒, 什么都没有留下(〜￣△￣)〜</div>
     </div>
     <div class="recommend">
-      <img src="../assets/images/love.png" class="love-icon" alt="love">
-      <span class="love-text">猜你喜欢</span>
+      <img src="../assets/images/love.png" class="love-icon" alt="love-icon">
+      <span class="love-txt">猜你喜欢</span>
     </div>
   </div>
 </template>
@@ -57,7 +57,7 @@
     .recommend
       margin-top: 1.5rem
       margin-left: 0.5rem 
-      .love-text
+      .love-txt
         margin-left: 0.7rem 
       .love-icon
         width: 1.5rem

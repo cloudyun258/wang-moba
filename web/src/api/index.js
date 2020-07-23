@@ -45,6 +45,15 @@ export function fetchHeroListOne (params) {
   })
 }
 
+// 首页英雄数据
+export function fetchHeroCate (params) {
+  return request({
+    url: '/hero/cate',
+    method: 'get',
+    params
+  })
+}
+
 // 英雄列表数据
 export function fetchHeroListTwo (params) {
   return request({
@@ -67,6 +76,24 @@ export function fetchHero (params) {
 export function fetchVideoListOne (params) {
   return request({
     url: '/video/listOne',
+    method: 'get',
+    params
+  })
+}
+
+// 获取赛事中心的二级分类
+export function fetchMatchCate (params) {
+  return request({
+    url: '/match/cate',
+    method: 'get',
+    params
+  })
+}
+
+// 获取赛事中心的文章
+export function fetchMatchArticle (params) {
+  return request({
+    url: '/match/article',
     method: 'get',
     params
   })

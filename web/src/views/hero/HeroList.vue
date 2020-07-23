@@ -5,8 +5,8 @@
         v-for="(item, index) in catesHero" 
         :key="index"
         :class="{'active': active == index}"
-        @click="toggleNav(index, item)">
-        <span class="nav-link">{{ item }}</span>
+        @click="toggleNav(index, item.name)">
+        <span class="nav-link">{{ item.name }}</span>
       </div>
     </div>
     <!-- end of nav -->
@@ -22,19 +22,19 @@
 </template>
 
 <script>
-  import  { fetchHeroListTwo } from '@/api/index'
+  import  { fetchHeroListTwo, fetchHeroCate } from '@/api/index'
   export default {
     name: 'HeroList',
     data () {
       return {
         heroList: [], // 当前分类下的英雄数据
-        catesHero: ['全部', '法师', '刺客', '战士', '辅助', '射手', '坦克'], //英雄分类
+        catesHero: [], //英雄分类
         active: 0,  // 当前选中的英雄分类
         heroType: '全部'
       }
     },
     mounted () {
-      this.fetchHeroListTwo()
+      this.fetchHeroCate()
     },
     methods: {
       // 获取英雄列表数据
@@ -42,8 +42,16 @@
         const res = await fetchHeroListTwo({ heroType: this.heroType })
         this.heroList = res.data
       },
+      // 获取英雄分类
+      async fetchHeroCate () {
+        const res = await fetchHeroCate()
+        this.catesHero = res.data
+        this.fetchHeroListTwo()
+      },
       // 英雄类型切换
       toggleNav (index, heroType) {
+        // 点击的是当前导航, 什么都不做
+        if (this.active == index) return
         this.active = index
         this.heroType = heroType
         this.fetchHeroListTwo()

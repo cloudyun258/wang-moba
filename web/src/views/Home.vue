@@ -95,7 +95,7 @@
         <div class="news-item" v-for="(item, index) in category.newsList" :key="index">
           <div class="news-cate" :class="calcNewsClass(item.categoryName)">{{ item.categoryName }}</div>
           <router-link tag="div" :to="`/article/detail/${item._id}`" class="news-title text-ellipsis">{{ item.title }}</router-link>
-          <div class="news-date">{{ item.date | formatDate }}</div>
+          <div class="news-date">{{ item.date | formatDate('MM/DD') }}</div>
         </div>
       </template>
     </m-card-list>
@@ -132,7 +132,7 @@
             <div class="video-info">
               <i class="icon-play"></i>
               <span class="play">{{ item.play }}</span>
-              <span class="date">{{ item.date | formatDateThree }}</span>
+              <span class="date">{{ item.date | formatDate('MM-DD') }}</span>
             </div>
           </div>
         </div>
@@ -321,7 +321,6 @@
         margin-left: 1rem
         font-size: $font-s
         color: $grey-77
-    
     .banner
       margin-top: 1.5rem
       img

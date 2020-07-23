@@ -2,7 +2,9 @@
   <div class="card">
     <div class="card-header" :class="{ 'border': more }">
       <div class="header">
-        <i class="icon" :style="{ backgroundImage: iconUrl }"></i>
+        <i class="icon" 
+        :style="{ backgroundImage: 'url(' + require(`../assets/images/icon/${this.icon}`) + ')' }">
+        </i>
         <div class="title">{{ title }}</div>
         <i class="more" v-if="more" @click="showMore"></i>
       </div>
@@ -22,12 +24,6 @@
       title: { type: String, require: true },
       icon: { type: String, require: true },
       more: { type: Boolean, default: true }
-    },
-    computed: {
-      // 头部 Icon 资源路径
-      iconUrl () {
-        return 'url(' + require(`../assets/images/icon/${this.icon}`) + ')'
-      }
     },
     methods: {
       // 点击查看更多跳转不同路由
@@ -54,7 +50,7 @@
     background-color: $white
     margin-top: 1rem
     padding: 0 1.7rem
-    border-bottom(#9e9e9e)
+    border-bottom($grey-9e)
     .card-header
       padding: 1.5rem 0 
       &.border
@@ -65,7 +61,8 @@
         height: 2rem
         line-height:2rem   
         .icon
-          bg-img(2rem, 2rem, '../assets/images/icon/icon.png', 1.4rem, auto, left, center)
+          bg-img(2rem, 2rem, '../assets/images/icon/icon.png', 
+          1.4rem, auto, left, center)
         .title
           position: relative
           top: 0.1rem

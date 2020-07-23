@@ -5,7 +5,7 @@
         <img src="../assets/images/backBg.png" alt="back">
       </div>
       <div class="title text-ellipsis">{{ articleDetail.title }}</div>
-      <div class="date">{{ articleDetail.date | formatDateTwo }}</div>
+      <div class="date">{{ articleDetail.date | formatDate('YYYY-MM-DD') }}</div>
     </div>
     <div class="body" v-html="articleDetail.body"></div>
     <div class="related">
@@ -21,7 +21,7 @@
           v-for="(item, index) in articleDetail.related" 
           :key="index">
           <div class="title text-ellipsis">{{ item.title }}</div>
-          <div class="date">{{ item.date | formatDateTwo }}</div>
+          <div class="date">{{ item.date | formatDate('YYYY-MM-DD') }}</div>
         </router-link>
       </div>
     </div>
@@ -84,7 +84,9 @@
     .body
       font-size: $font-m
       padding: 0 1.8rem
-      margin-bottom: 1.8rem 
+      margin-bottom: 1.8rem
+      >>> iframe
+        width: 100% 
       >>> p
         line-height: 1.5em
         color: $dark-33

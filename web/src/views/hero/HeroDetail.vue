@@ -242,26 +242,16 @@
 <script>
   import { fetchHero } from '@/api/index'
   import Card from '@/components/Card'
+  import minxins_swiper from '@/assets/javascript/mixins_swiper'
   export default {
     name: 'HeroDetail',
+    mixins: [minxins_swiper],
     props: ['id'],
     data () {
       return {
         heroDetail: null,
         active: 0,  // 当前选中的导航项
-        skillActive: 0,  //当前选中的技能项
-        options: {
-          // 每个swiper项高度自动撑开
-          autoHeight: true,
-          on: {
-            // swiper从当前slide开始过渡到另一个slide时执行
-            slideChangeTransitionStart: () => {
-              let swiper = this.$refs.mySwiper.$swiper
-              let activeIndex = swiper.activeIndex
-              this.active = activeIndex
-            }
-          }
-        }        
+        skillActive: 0  //当前选中的技能项      
       }
     },
     mounted () {
@@ -283,11 +273,6 @@
         this.heroDetail = res.data
         // 保存皮肤数据到本地
         localStorage.setItem('heroSkins', JSON.stringify(res.data.skins))
-      },
-      // 导航切换
-      toggleNav (index) {
-        this.active = index
-        this.$refs.mySwiper.$swiper.slideTo(index, 300, false)
       },
       // 一图识英雄
       heroShow () {

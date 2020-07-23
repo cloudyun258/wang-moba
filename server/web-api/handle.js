@@ -130,7 +130,7 @@ module.exports = {
     response(res, 0, '获取新闻列表成功', { newsList, hasNext })
   },
 
-  //首页英雄数据
+  // 首页英雄数据
   async heroListOneHandle (req, res) {
     // 查询英雄二级分类，以及属于该分类下的所有英雄
     const catesData = await CategoryModel.aggregate([
@@ -142,7 +142,7 @@ module.exports = {
           foreignField: 'categories',
           as: 'heroList'
         }
-      },
+      }
     ])
     // 添加一个热门分类, 
     catesData.unshift({
@@ -182,6 +182,14 @@ module.exports = {
     response(res, 0, '获取英雄详情成功', item)
   },
 
+  // 英雄列表分类
+  async heroCateHandle (req, res) {
+    const cate = await CategoryModel.find()
+    .where({ parent: '5ef9a67208fb182c3c173e77' }).lean()
+    cate.unshift({ name: '全部' })
+    response(res, 0, '获取英雄分类成功', cate)
+  },
+
   // 英雄列表数据
   async heroListTwoHandle (req, res) {
     let { heroType } = req.query
@@ -218,5 +226,54 @@ module.exports = {
     ])
     response(res, 0, '获取首页视频数据成功', catesData)
   },
+
+  // 赛事中心二级分类
+  async matchCateHandle (req, res) {
+    const cate = await CategoryModel.find().where({ parent: '5f006b45422de13514b1a310' })
+    response(res, 0, '获取赛事中心二级分类成功', cate)
+  },
+
+  // 赛事中心文章
+  async matchArticleHandle (req, res) {
+    const params = req.query.params
+    // 每页文章数量
+    const pageSize = 7
+    // 查询英雄二级分类，以及属于该分类下的所有英雄
+    let catesData = await CategoryModel.aggregate([
+      { $match: { parent: mongoose.Types.ObjectId('5f006b45422de13514b1a310') } },
+      {
+        $lookup: {
+          from: 'articles',
+          localField: '_id',
+          foreignField: 'categories',
+          as: 'matchList'
+        }
+      }
+    ])
+    // 根据params遍历 cateesDate截取每一个分类下的文章数量
+    catesData.forEach((item, i) => {
+      // 标记当前分类下的文章是否请求完成
+      item.hasNext = true
+      let page = 1
+      params.forEach((par, j) => {
+        par = JSON.parse(par)
+        if (par.name == item.name) {
+          page = par.page
+          return
+        }
+      })
+      let skip = page * pageSize
+      // 请求的文章数量大于或等于最大数量
+      if (skip >= item.matchList.length) {
+        item.hasNext = false
+        skip = item.matchList.length
+      }
+      // 截取数组 0 - skip(不包括)
+      item.matchList = item.matchList.slice(0, skip)
+    })
+
+    response(res, 0, '获取赛事中心文章成功', catesData)
+    
+  }
 
 }
