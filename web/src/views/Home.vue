@@ -3,7 +3,7 @@
     <div class="swiper-wrap">
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="(item, index) in homeAds" :key="index">
-          <a :href="item.url"><img width="100%" :src="item.image" alt="ads"></a>
+          <a :href="item.url"><img width="100%" style="display:block" :src="item.image" alt="ads"></a>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>

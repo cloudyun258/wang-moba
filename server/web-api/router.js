@@ -30,6 +30,10 @@ router.get('/video/listOne', handle.videoListOneHandle)
 router.get('/match/cate', handle.matchCateHandle)
 // 赛事中心文章
 router.get('/match/article', handle.matchArticleHandle)
+// 首页轮播图
+router.get('/strategy/home', handle.strategyAdsHandle)
+// 视频排行榜
+router.get('/video/rank', handle.videoRankHandle)
 
 
 // 导出路由对象

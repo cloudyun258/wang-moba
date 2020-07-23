@@ -99,3 +99,21 @@ export function fetchMatchArticle (params) {
   })
 }
 
+// 策略中心轮播广告
+export function fetchStrategyAds (params) {
+  return request({
+    url: '/strategy/home',
+    method: 'get',
+    params
+  })
+}
+
+// 策略中心视频排行榜
+export function fetchVideoRank (params) {
+  return request({
+    url: '/video/rank',
+    method: 'get',
+    params
+  })
+}
+

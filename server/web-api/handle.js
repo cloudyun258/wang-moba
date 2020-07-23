@@ -212,7 +212,7 @@ module.exports = {
 
   // 首页视频数据
   async videoListOneHandle (req, res) {
-    // 查询英雄二级分类，以及属于该分类下的所有英雄
+    // 查询英雄二级分类，以及属于该分类下的所有视频
     const catesData = await CategoryModel.aggregate([
       { $match: { parent: mongoose.Types.ObjectId('5ef9a68208fb182c3c173e78') } },
       {
@@ -238,7 +238,7 @@ module.exports = {
     const params = req.query.params
     // 每页文章数量
     const pageSize = 7
-    // 查询英雄二级分类，以及属于该分类下的所有英雄
+    // 查询英雄二级分类，以及属于该分类下的所有文章
     let catesData = await CategoryModel.aggregate([
       { $match: { parent: mongoose.Types.ObjectId('5f006b45422de13514b1a310') } },
       {
@@ -252,7 +252,7 @@ module.exports = {
     ])
     // 根据params遍历 cateesDate截取每一个分类下的文章数量
     catesData.forEach((item, i) => {
-      // 标记当前分类下的文章是否请求完成
+      // 标记当前分类下的文章是否全部请求了
       item.hasNext = true
       let page = 1
       params.forEach((par, j) => {
@@ -274,6 +274,34 @@ module.exports = {
 
     response(res, 0, '获取赛事中心文章成功', catesData)
     
+  },
+
+  // 策略中心轮播图
+  async strategyAdsHandle (req, res) {
+    const strategyAds = await AdModel.findById('5f193e8f81b74436b0cd5c76')
+    response(res, 0, '获取策略中心广告数据成功', strategyAds.items)
+  },
+
+  // 视频排行榜
+  async videoRankHandle (req, res) {
+    const dayRank = await VideoModel.find().limit(10)
+    const weekRank = await VideoModel.find().skip(3).limit(10)
+    const monthRank = await VideoModel.find().skip(6).limit(10)
+    let catesData = [
+      {
+        name: '日排行',
+        videoList: dayRank
+      },
+      {
+        name: '周排行',
+        videoList: weekRank
+      },
+      {
+        name: '月排行',
+        videoList: monthRank
+      },
+    ]
+    response(res, 0, '获取视频排行数据成功', catesData)
   }
 
 }
