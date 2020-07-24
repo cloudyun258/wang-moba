@@ -1,19 +1,19 @@
 <template>
   <div class="card">
-    <div class="card-header" :class="{ 'border': more }">
+    <div class="card-header" :class="{ 'more': more }">
       <div class="header">
-        <i class="icon" 
+        <i class="type-icon" 
         :style="{ backgroundImage: 'url(' + require(`../assets/images/icon/${this.icon}`) + ')' }">
         </i>
         <div class="title">{{ title }}</div>
-        <i class="more" v-if="more" @click="showMore"></i>
+        <i class="more-icon" v-if="more" @click="showMore"></i>
       </div>
       <slot name="banner"></slot>
-   </div>
-   <!-- end of header -->
-   <div class="card-body">
-     <slot name="content"></slot>
-   </div>
+    </div>
+    <!-- end of header -->
+    <div class="card-body">
+      <slot name="content"></slot>
+    </div>
   </div>
 </template>
 
@@ -53,24 +53,23 @@
     border-bottom($grey-9e)
     .card-header
       padding: 1.5rem 0 
-      &.border
+      &.more
         margin-bottom: 1.2rem  
         border-bottom()
       .header
         flex-align(flex-start)
         height: 2rem
-        line-height:2rem   
-        .icon
-          bg-img(2rem, 2rem, '../assets/images/icon/icon.png', 
-          1.4rem, auto, left, center)
+        line-height: 2rem   
+        .type-icon
+          bg-img(2rem, 2rem, '../assets/images/icon/icon.png', 1.4rem, auto, left, center)
         .title
+          flex: 1
           position: relative
           top: 0.1rem
           font-size: $font-l
           margin-left: 0.5rem
-          flex: 1
           color: $dark-21 
-        .more
+        .more-icon
           sprite-icon(1.8rem, 1.2rem, -17rem, -25rem) 
     .card-body
       padding-bottom: 0

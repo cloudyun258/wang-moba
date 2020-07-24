@@ -2,12 +2,14 @@
   <div id="article-detail">
     <div class="header">
       <div class="back" @click="$router.go(-1)">
-        <img src="../assets/images/backBg.png" alt="back">
+        <img src="../assets/images/backBg.png" class="back-icon" alt="back-icon">
       </div>
       <div class="title text-ellipsis">{{ articleDetail.title }}</div>
       <div class="date">{{ articleDetail.date | formatDate('YYYY-MM-DD') }}</div>
     </div>
+    <!-- end of header -->
     <div class="body" v-html="articleDetail.body"></div>
+    <!-- end of body -->
     <div class="related">
       <div class="related-header">
         <img src="../assets/images/related.png" alt="related">
@@ -39,6 +41,7 @@
       }
     },
     watch: {
+      // 点击关联文章时获取文章信息
       id () {
         this.fetchArticle()
       }
@@ -65,10 +68,9 @@
       height: 3.7rem
       margin-bottom: 1rem 
       border-bottom($grey-99)
-      .back img
+      .back-icon
         display: block
         width: 1rem
-        height: 100%
         margin-left: 0.7rem
       .title
         margin-left: 1rem

@@ -10,7 +10,7 @@
       </div>
     </div>
     <!-- end of topbar -->
-    <div class="skin">
+    <div class="skin" v-if="skins.length">
       <swiper ref="mySwiper" :options="swiperOptions" v-if="skins.length">
         <swiper-slide v-for="(item, index) in skins" :key="index">
           <img :src="item.banner" width="100%" alt="banner">
@@ -19,6 +19,17 @@
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
+    <div v-else 
+      style="text-align:center; 
+      background-color:#fff;
+      height: calc(100vh - 4.5rem);
+      line-height: calc(100vh - 4.5rem);
+      margin: -1rem">
+      <img 
+        width="50%" 
+        src="../../assets/images/empty_bilibili33.png" 
+        alt="empty">
+    </div> 
   </div>
 </template>
 
@@ -51,8 +62,7 @@
   #hero-skin
     padding: 5.5rem 1rem 0 
     .topbar
-      sprite-icon(100%, 4.5rem, 0, -71.5rem, 
-      75rem, 91rem, "../../assets/images/icon/icon.png")
+      sprite-icon(100%, 4.5rem, 0, -71.5rem, 75rem, 91rem, "../../assets/images/icon/icon.png")
       flex-align(flex-start)
       .text 
         flex: 1

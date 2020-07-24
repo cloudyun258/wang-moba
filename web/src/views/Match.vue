@@ -23,7 +23,12 @@
           </div>
           <div class="infor-wrap">赛事资讯</div>
           <div class="article-wrap">
-            <router-link tag="div" :to="`/article/detail/${article._id}`" class="article-item" v-for="(article, j) in item.matchList" :key="j">
+            <router-link 
+              tag="div" 
+              :to="`/article/detail/${article._id}`" 
+              class="article-item" 
+              v-for="(article, j) in item.matchList" 
+              :key="j">
               <div class="article-title text-ellipsis">{{ article.title }}</div>
               <div class="article-date">{{ article.date | formatDate('MM/DD') }}</div>
             </router-link>
@@ -220,23 +225,23 @@
         .article-item
           flex-align()
           height: 3.2rem 
-          .article-title
-            font-size: $font-md 
-          .article-date
-            margin-left: 1.5rem
-            color: $grey-9e
-            font-size: $font-sm
+        .article-title
+          font-size: $font-md 
+        .article-date
+          margin-left: 1.5rem
+          color: $grey-9e
+          font-size: $font-sm
       .next
         height: 3.5rem
         overflow-y: auto 
         padding: 0 0.7rem
         margin-bottom: 1.5rem 
-      .next-btn
-        width: 100%
-        background-color: $grey-e6
-        height: 3.5rem
-        line-height: 3.5rem 
-        color: $grey-85
-        font-size: $font-sm      
+        .next-btn
+          width: 100%
+          background-color: $grey-e6
+          height: 3.5rem
+          line-height: 3.5rem 
+          color: $grey-85
+          font-size: $font-sm      
 
 </style>

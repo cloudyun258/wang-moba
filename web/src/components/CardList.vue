@@ -4,6 +4,7 @@
       <template v-slot:banner>
         <slot name="banner"></slot>
       </template>
+      <!-- banner -->
       <template v-slot:content>
         <!-- 分类导航 -->
         <div class="nav">

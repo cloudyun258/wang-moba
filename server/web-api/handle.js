@@ -144,7 +144,7 @@ module.exports = {
         }
       }
     ])
-    // 添加一个热门分类, 
+    // 添加一个热门分类
     catesData.unshift({
       name: '热门',
       heroList: await HeroModel.find().where({ hot: true }).limit(10)

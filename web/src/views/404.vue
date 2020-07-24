@@ -1,6 +1,6 @@
 <template>
   <div id="not-found">
-    <img src="../assets/images/404.png" alt="404 Not Found">
+    <img src="../assets/images/404.png" class="error" alt="404 Not Found">
     <button class="back radius-small" @click="$router.push('/')">返回主页</button>
   </div>
 </template>
@@ -16,6 +16,8 @@
   #not-found
     padding-top: 5rem
     text-align: center
+    .error
+      width: 90% 
     .back
       font-size: $font-md
       padding: .6rem 2rem

@@ -194,8 +194,9 @@
           <div v-else 
             style="text-align:center; 
             background-color:#fff;
-            height: 43rem;
-            padding-top: 5rem">
+            height:calc(100vh - 27.5rem);
+            line-height:calc(100vh - 27.5rem);"
+          >
             <img width="50%" src="../../assets/images/empty_bilibili33.png" alt="empty">
           </div>
         </swiper-slide>
@@ -225,8 +226,9 @@
           <div v-else 
             style="text-align:center; 
             background-color:#fff;
-            height: 43rem;
-            padding-top: 5rem">
+            height:calc(100vh - 27.5rem);
+            line-height:calc(100vh - 27.5rem);"
+            >
             <img 
               width="50%" 
               src="../../assets/images/empty_bilibili33.png" 
@@ -299,8 +301,7 @@
   #hero-detail
     padding-top: 4.5rem 
     .topbar
-      sprite-icon(100%, 4.5rem, 0, -71.5rem, 
-      75rem, 91rem, "../../assets/images/icon/icon.png")
+      sprite-icon(100%, 4.5rem, 0, -71.5rem, 75rem, 91rem, "../../assets/images/icon/icon.png")
       flex-align(flex-start)
       color: $white
       .text 
@@ -316,8 +317,7 @@
           margin-left: 1rem
           font-size: $font-xxl
     .basic-info
-      bg-img(100%, 19rem, "../../assets/images/icon/icon.png",
-      auto, 100%, top, center)
+      bg-img(100%, 19rem, "../../assets/images/icon/icon.png", auto, 100%, top, center)
       .info-wrap
         position: relative
         width: 100%
@@ -354,24 +354,24 @@
             animation: heroAttack 1.9s 
           &:nth-child(4)
             animation: heroSurvive 2.2s                         
-          .badge
-            display: inline-block
-            width: 1.8rem
-            height: 1.8rem
-            line-height: 1.8rem
-            text-align: center  
-            background-color: $white
-            color: $grey-b6
-            transform: scale(.66)
-            font-weight: 200 
-          .badge-difficult
-            background-color: $brown
-          .badge-skill
-            background-color: $blue-1f
-          .badge-attack
-            background-color: $red-79
-          .badge-survive
-            background-color: $dark-3c
+        .badge
+          display: inline-block
+          width: 1.8rem
+          height: 1.8rem
+          line-height: 1.8rem
+          text-align: center  
+          background-color: $white
+          color: $grey-b6
+          transform: scale(.66)
+          font-weight: 200 
+        .badge-difficult
+          background-color: $brown
+        .badge-skill
+          background-color: $blue-1f
+        .badge-attack
+          background-color: $red-79
+        .badge-survive
+          background-color: $dark-3c
         .skin
           color: $grey-b6
           font-size: $font-xs
@@ -436,14 +436,14 @@
           padding-top: 1.5rem 
           .skill-icon
             flex-align()
-            .skill-item
-              margin: 0 0.5rem
-              border: 0.25rem solid transparent
-              &.skill-active
-                border-color: $orange-d5
-              .icon
-                display: block
-                width: 6rem
+          .skill-item
+            margin: 0 0.5rem
+            border: 0.25rem solid transparent
+            &.skill-active
+              border-color: $orange-d5
+            .icon
+              display: block
+              width: 6rem
           .skill-info
             padding-top: 2rem
             color: $dark-34

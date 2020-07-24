@@ -12,7 +12,7 @@ import 'swiper/css/swiper.css'
 
 Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 
-// 日期格式化过滤器
+// 全局日期格式化过滤器
 Vue.filter('formatDate', (date, format) => {
   return dayjs(Number(date)).format(format)
 })

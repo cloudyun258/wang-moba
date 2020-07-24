@@ -45,7 +45,7 @@ export function fetchHeroListOne (params) {
   })
 }
 
-// 首页英雄数据
+// 英雄列表分类
 export function fetchHeroCate (params) {
   return request({
     url: '/hero/cate',

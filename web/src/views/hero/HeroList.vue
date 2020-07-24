@@ -2,7 +2,7 @@
   <div id="hero-list">
     <div class="nav">
       <div class="nav-item" 
-        v-for="(item, index) in catesHero" 
+        v-for="(item, index) in heroCates" 
         :key="index"
         :class="{'active': active == index}"
         @click="toggleNav(index, item.name)">
@@ -12,10 +12,10 @@
     <!-- end of nav -->
     <div class="hero">
       <div class="hero-item" v-for="(item, index) in heroList" :key="index">
-        <div class="hero-avatar">
-          <img :src="item.avatar" class="avatar" alt="avatar">
+        <div class="avatar">
+          <img :src="item.avatar" class="avatar-img" alt="avatar">
         </div>
-        <div class="hero-name">{{ item.name }}</div>
+        <div class="name">{{ item.name }}</div>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
     data () {
       return {
         heroList: [], // 当前分类下的英雄数据
-        catesHero: [], //英雄分类
+        heroCates: [], //英雄分类
         active: 0,  // 当前选中的英雄分类
         heroType: '全部'
       }
@@ -45,7 +45,7 @@
       // 获取英雄分类
       async fetchHeroCate () {
         const res = await fetchHeroCate()
-        this.catesHero = res.data
+        this.heroCates = res.data
         this.fetchHeroListTwo()
       },
       // 英雄类型切换
@@ -90,17 +90,17 @@
         padding: .7rem
         padding-bottom: 0
         box-sizing: border-box 
-        .hero-avatar
-          position: relative
-          width: 100%
-          padding-bottom: 100%
-          .avatar
-            pos-base()
-        .hero-name
-          margin-top: 0.5rem 
-          margin-bottom: 0.2rem 
-          height: 2rem
-          line-height: 2rem
-          font-size: $font-s
-          color: $dark-22   
+      .avatar
+        position: relative
+        width: 100%
+        padding-bottom: 100%
+        .avatar-img
+          pos-base()
+      .name
+        margin-top: 0.5rem 
+        margin-bottom: 0.2rem 
+        height: 2rem
+        line-height: 2rem
+        font-size: $font-s
+        color: $dark-22   
 </style>

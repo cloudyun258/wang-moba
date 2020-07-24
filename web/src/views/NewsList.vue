@@ -2,7 +2,7 @@
   <div id="news-list">
     <div class="nav">
       <div class="nav-item" 
-        v-for="(item, index) in catesList" 
+        v-for="(item, index) in newsCates" 
         :key="index"
         :class="{'active': active == index}"
         @click="toggleNav(index, item.name)">
@@ -40,7 +40,7 @@
     data () {
       return {
         active: 0,  // 当前选中的导航
-        catesList: [],
+        newsCates: [],  // 新闻分类数据
         newsList: [],  // 新闻列表数据
         newsType: '热门', // 选中的新闻类型
         page: 1,
@@ -56,7 +56,7 @@
       // 获取新闻数据, 用于动态渲染导航
       async fetchNewsListOne () {
         const res = await fetchNewsListOne()
-        this.catesList = res.data
+        this.newsCates = res.data
       },
       // 获取新闻列表数据
       async fetchNewsListTwo () {

@@ -4,11 +4,15 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
 /admin/server
 /admin/node_modules
+
 /server/node_modules
 /server/upload/video
+
 /web/node_modules
+
 resource
 
 # Runtime data

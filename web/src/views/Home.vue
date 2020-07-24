@@ -1,84 +1,87 @@
 <template>
   <div id="home">
-    <div class="swiper-wrap">
+    <div class="ads-wrap">
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="(item, index) in homeAds" :key="index">
-          <a :href="item.url"><img width="100%" style="display:block" :src="item.image" alt="ads"></a>
+          <a :href="item.url">
+            <img :src="item.image" style="display:block; width:100%" alt="ads-img">
+          </a>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
     <!-- end of swiper -->
+   
     <div class="icon-wrap">
       <div class="icon" :class="{'down': !foldIcon}">
         <div class="icon-item">
-          <a href="https://pvp.qq.com/m/m201706/coming/index.htm" style="display: block">
+          <a href="https://pvp.qq.com/m/m201706/coming/index.htm" class="icon-link">
             <i class="sprite sprite-one"></i>
             <div class="text">爆料站</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite sprite-two"></i>
             <div class="text">故事站</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite sprite-three"></i>
             <div class="text">周边商城</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite sprite-four"></i>
             <div class="text">体验服</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite sprite-five"></i>
             <div class="text">新人专区</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite sprite-six"></i>
             <div class="text">荣耀-传承</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite sprite-seven"></i>
             <div class="text">王者营地</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite sprite-eight"></i>
             <div class="text">公众号</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite bg-one"></i>
             <div class="text">版本介绍</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite bg-two"></i>
             <div class="text">对局环境</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite bg-three"></i>
             <div class="text">无限王者团</div>
           </a>
         </div>
         <div class="icon-item">
-          <a href="javascript:;" style="display: block">
+          <a href="javascript:;" class="icon-link">
             <i class="sprite bg-four"></i>
             <div class="text">创意互动营</div>
           </a>
@@ -86,29 +89,40 @@
       </div> 
       <div class="fold" @click="foldIcon=!foldIcon">
         <i class="fold-icon" :class="{ 'down': !foldIcon }"></i>
-        <span class="fold-nane">收起</span>
+        <span class="fold-txt">{{ foldIcon ? '展开' : '收起' }}</span>
       </div>
     </div>
     <!-- end of icon -->
-    <m-card-list title="新闻资讯" icon="icon_news.jpg" :categories="newsList">
+
+    <m-card-list title="新闻资讯" icon="icon_news.jpg" :categories="newsCates">
       <template #item="{category}">
         <div class="news-item" v-for="(item, index) in category.newsList" :key="index">
           <div class="news-cate" :class="calcNewsClass(item.categoryName)">{{ item.categoryName }}</div>
-          <router-link tag="div" :to="`/article/detail/${item._id}`" class="news-title text-ellipsis">{{ item.title }}</router-link>
+          <router-link 
+            tag="div" 
+            :to="`/article/detail/${item._id}`" 
+            class="news-title text-ellipsis">
+            {{ item.title }}
+          </router-link>
           <div class="news-date">{{ item.date | formatDate('MM/DD') }}</div>
         </div>
       </template>
     </m-card-list>
     <!-- end of newsCard -->
-    <m-card-list title="英雄列表" icon="icon_hero.jpg" :categories="heroList">
+
+    <m-card-list title="英雄列表" icon="icon_hero.jpg" :categories="heroCates">
       <template v-slot:banner>
         <div class="banner">
-          <img src="../assets/images/new_hero.jpg" alt="new_hero">
+          <img src="../assets/images/new_hero.jpg" class="news-hero" alt="new_hero">
         </div>
       </template>
       <template #item="{category}">
         <div class="hero">
-          <router-link tag="div" :to="`/hero/detail/${item._id}`" class="hero-item" v-for="(item, index) in category.heroList" :key="index">
+          <router-link 
+            tag="div" 
+            :to="`/hero/detail/${item._id}`" 
+            class="hero-item" v-for="(item, index) in category.heroList" 
+            :key="index">
             <div class="hero-avatar">
               <img :src="item.avatar" class="avatar" alt="avatar">
             </div>
@@ -118,19 +132,20 @@
       </template>
     </m-card-list>
     <!-- end of heroCard -->
-    <m-card-list title="精彩视频" icon="icon_video.png" :categories="videoList">
+
+    <m-card-list title="精彩视频" icon="icon_video.png" :categories="videoCates">
       <template #item="{category}">
         <div class="video">
           <div class="video-item"
             v-for="(item, index) in category.videoList" 
             @click="videoPlay(item)"
             :key="index">
-            <div class="video-cover">
-              <img :src="item.cover" class="cover" alt="cover">
+            <div class="cover">
+              <img :src="item.cover" class="cover-img" alt="cover">
             </div>
-            <div class="video-title">{{ item.title }}</div>
-            <div class="video-info">
-              <i class="icon-play"></i>
+            <div class="title">{{ item.title }}</div>
+            <div class="info">
+              <i class="play-icon"></i>
               <span class="play">{{ item.play }}</span>
               <span class="date">{{ item.date | formatDate('MM-DD') }}</span>
             </div>
@@ -139,7 +154,8 @@
       </template>      
     </m-card-list>
     <!-- end of videoCard -->
-    <router-link tag="div" to="/strategy" class="loading-more">加载更多内容</router-link>
+
+    <router-link tag="div" to="/strategy" class="video-more">加载更多内容</router-link>
   </div>
 </template>
 
@@ -151,11 +167,11 @@
     name: 'Home',
     data () {
       return {
-        homeAds: [], // 广告数据
+        homeAds: [],  // 广告数据
         foldIcon: false, // 控制图标区域的展开
-        newsList: [],   // 新闻数据 
-        heroList: [],   // 英雄数据
-        videoList: [],  // 视频数据
+        newsCates: [],   // 新闻数据 
+        heroCates: [],   // 英雄数据
+        videoCates: [],  // 视频数据
         swiperOptions: {
           // 小圆点
           pagination: {
@@ -189,17 +205,17 @@
       // 获取新闻数据
       async fetchNewsListOne () {
         const res = await fetchNewsListOne()
-        this.newsList = res.data
+        this.newsCates = res.data
       },
       // 获取英雄数据
       async fetchHeroListOne () {
         const res = await fetchHeroListOne()
-        this.heroList = res.data
+        this.heroCates = res.data
       },
       // 获取视频数据
       async fetchVideoListOne () {
         const res = await fetchVideoListOne()
-        this.videoList = res.data
+        this.videoCates = res.data
       },
       // 跳转到视频播放页
       videoPlay (item) {
@@ -280,7 +296,9 @@
         .bg-three
           bg-img(5rem, 2.4rem, "../assets/images/icon/wxwzt.png", 5rem, 1.7rem, 0, 0.5rem)   
         .bg-four
-          bg-img(2.4rem, 2.4rem, "../assets/images/icon/cyhdy.png", 2.4rem, 2.4rem)   
+          bg-img(2.4rem, 2.4rem, "../assets/images/icon/cyhdy.png", 2.4rem, 2.4rem)
+      .icon-link
+        display: block
       .fold
         height: 3rem
         line-height: 3rem
@@ -323,7 +341,7 @@
         color: $grey-77
     .banner
       margin-top: 1.5rem
-      img
+      .news-hero
         display: block
         width: 100%
     .hero
@@ -335,55 +353,53 @@
         padding: .7rem
         padding-bottom: 0
         box-sizing: border-box 
-        .hero-avatar
-          position: relative
-          width: 100%
-          padding-bottom: 100%
-          .avatar
-            pos-base()
-        .hero-name
-          margin-top: 0.5rem 
-          margin-bottom: 0.2rem 
-          height: 2rem
-          line-height: 2rem
-          font-size: $font-s
-          color: $dark-22
+      .hero-avatar
+        position: relative
+        width: 100%
+        padding-bottom: 100%
+        .avatar
+          pos-base()
+      .hero-name
+        margin-top: 0.5rem 
+        margin-bottom: 0.2rem 
+        height: 2rem
+        line-height: 2rem
+        font-size: $font-s
+        color: $dark-22
     .video
       flex-align(flex-start, flex-start, wrap)
       margin: 0 -0.4rem
       .video-item
         width: 50%
-        padding: .4rem
+        padding: 0.4rem
         padding-bottom: 0
         margin-bottom: 1.3rem 
         box-sizing: border-box 
-        .video-cover
+        .cover
           position: relative
           width: 100%
           height: 10.2rem 
-          .cover
+          .cover-img
             pos-base()
             width: 100%
             height: 10.2rem 
-        .video-title
+        .title
           margin-top: 1rem
           margin-bottom: 0.5rem
           color: $dark-22
+          height: 4.3rem 
           line-height: 1.7em 
           font-size: $font-sm 
           text-ellipsis(2) 
-        .video-info
-          .icon-play
+        .info
+          font-size: $font-xxs
+          color: $grey-7a
+          .play-icon
             sprite-icon(1.2rem, 0.9rem, -11.7rem, -23.4rem)
-            margin: 0 0.7rem
-          .play
-            font-size: $font-xxs
-            color: $grey-7a
+            margin: 0 0.5rem
           .date
             float: right
-            font-size: $font-xxs
-            color: $grey-7a
-    .loading-more
+    .video-more
       position: relative
       z-index: 9999 
       text-align: center
