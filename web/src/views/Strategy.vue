@@ -108,7 +108,7 @@
         </div>
         <div class="hot-video-2">
           <div class="video-2-item"
-            v-for="(item, index) in heroVideo.slice(0, 2)" :key="index"
+            v-for="(item, index) in heroVideo.slice(2, 4)" :key="index"
             @click="videoPlay(item)">
             <div class="cover">
               <img :src="item.cover" class="cover-img" alt="cover">
