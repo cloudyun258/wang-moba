@@ -42,15 +42,15 @@ server -- 服务端
 7. 广告位管理
 8. 管理员管理
 
-![md_1](server/public/readme/md_1.png)
+![md_1](<https://gitee.com/yuchuangye/wang0moba/raw/master/server/public/readme/md_1.png>)
 
-![md_2](server/public/readme/md_2.png)
+![md_2](<https://gitee.com/yuchuangye/wang0moba/raw/master/server/public/readme/md_2.png>)
 
 ## 前台项目
 
-![md_11](server/public/readme/md_11.png)
+![md_11](<https://gitee.com/yuchuangye/wang0moba/raw/master/server/public/readme/md_11.PNG>)
 
-![md_12](server/public/readme/md_12.png)
+![md_12](<https://gitee.com/yuchuangye/wang0moba/raw/master/server/public/readme/md_12.PNG>)
 
 ## 许可证
 
